@@ -19,4 +19,11 @@
 
 -- Documents, https://docs.microsoft.com/nb-no/sql/?view=sql-server-ver15
 
+-- Lab 1, Exercise 1:
+-- Working with SQL Server Management Studio
+-- Exercise 2: Creating and Organizing T-SQL Scripts
+-- Ctrl+T, hidden read only resource, types of objects in T-SQL, schemas, views, SSSM results, grid, file, solution and project
+
+
+
 
