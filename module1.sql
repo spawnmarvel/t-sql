@@ -1,4 +1,4 @@
--- Module 1
+-- Module 1: Introduction to Microsoft SQL Server
 -- T-sql is a set based language, .sql, GO keyword separate batches (Stored procedures, break into batches)
 -- GO
 -- Do stuff, insert, update
