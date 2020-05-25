@@ -9,11 +9,14 @@
 
 -- MSSM everything for DBA. 
 -- Connect, bottom, properties for server.
--- Same for database, files, permission, transaction log etc. Can go to any object and change them and before apply can ciew script for it.
+-- Same for database, files, permission, transaction log etc. Can go to any object and change them and before apply can view 
+-- script for it.
 
--- File management
+-- File management, save, open etc
 
 -- Get all databases
 -- SELECT NAME FROM sys.databases;
+
+-- Documents, https://docs.microsoft.com/nb-no/sql/?view=sql-server-ver15
 
 
