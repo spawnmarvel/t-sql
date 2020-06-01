@@ -18,6 +18,7 @@
 -- Uses GO keyword to separate
 -- For simple query's GO will not be used, when you nned to create and manipulate objects, you might nned to separate.
 -- 
+USE BikeStores;
 DECLARE @order_id_get int;
 SET @order_id_get = 2;
 
@@ -37,11 +38,22 @@ WHERE order_id = @order_id_get;
 
 -- Element,		Expression,				Role
 -- SELECT, 		select list,			Defines which columns to return
--- FROM, 		table sourcre,			Defines table to query
+-- FROM, 		table source,			Defines table to query
 -- WHERE, 		search condition,		Filters returned data using a predicate
 -- GROUP BY, 	group by list, 			Arrange rows by groups
 -- HAVING, 		search condition, 		Filters group by predicate
--- ORDER BY,	order by list, 			sorts the result	 	
+-- ORDER BY,	order by list, 			sorts the result	 
+
+-- Logical Query Processing
+-- 5 SELECT
+-- 1 FROM
+-- 2 WHERE
+-- 3 GROUP BY	
+-- 4 HAVING
+-- 6 ORDER BY
+
+-- Module 2, Lab 2
+
 
 
 
