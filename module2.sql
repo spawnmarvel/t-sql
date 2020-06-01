@@ -3,3 +3,9 @@
 
 -- Lesson 1
 -- About T-SQL
+-- Elements    Predicates and Operators
+-- Predicators, ALL, ANY, BETWEEN, IN, LIKE, OR , SOME
+-- Comparison Operators, =, >, <, >=, <=, 1=, !>, !<
+-- Logical Operators, AND, OR, NOT
+-- Arithmetic Operators, *,/, %, +, -
+-- Concatination, +
