@@ -20,6 +20,34 @@ USE BikeStores;
 SELECT order_id, quantity, list_price, ((list_price * 50)/100) black_friday
 FROM sales.order_items
 
+-- Eliminating Duplicates with DISTINCT
+-- Rows are not guaranteed to be unique
+-- DISTINCT only unique, removes duplicates
+
+USE BikeStores
+
+SELECT DISTINCT brand_name
+FROM production.brands
+
+USE BikeStores
+
+SELECT DISTINCT product_name, model_year
+FROM production.products
+
+
+
+-- Find duplicates
+
+USE BikeStores
+
+SELECT product_name, model_year
+FROM production.products
+GROUP BY product_name, model_year
+HAVING COUNT(*)>1
+
+
+-- Lesson 3:	Using Column and Table Aliases
+
 
 
 
