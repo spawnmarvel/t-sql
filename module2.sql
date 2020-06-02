@@ -52,7 +52,15 @@ WHERE order_id = @order_id_get;
 -- 4 HAVING
 -- 6 ORDER BY
 
--- Module 2, Lab 2
+-- Set theroy and SQL server, thinking in sets
+-- Characteristics of a set, Example
+-- Elements of a set called Members, Customers as a member of a set called Customers
+-- Elements of a set are described bu attributes, Frist name, Last name, age
+-- Elemenets must be unique, Customer ID
+
+-- Avoid cursor
+
+-- Module 2, Lab 2 done
 
 
 
