@@ -60,7 +60,7 @@ WHERE order_id = @order_id_get;
 
 -- Avoid cursor
 
--- Module 2, Lab 2 done
+-- Module 2, run some selects's, comment out etc, Lab 2 done
 
 
 
