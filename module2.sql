@@ -23,7 +23,7 @@ DECLARE @order_id_get int;
 SET @order_id_get = 2;
 
 SELECT order_id, order_status, order_date
-FROM BikeStores.sales.orders
+FROM sales.orders
 WHERE order_id = @order_id_get;
 
 -- Predicates, is filter, true or false, I wanto to see order from yeserday, WHERE clause
