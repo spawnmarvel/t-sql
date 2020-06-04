@@ -107,6 +107,11 @@ SELECT p.product_name, p.list_price, p.model_year,
 FROM production.products p
 ORDER BY 2
 
+-- Lab: Writing Basic SELECT Statements
+-- Exercise 1: Writing Simple SELECT Statements
+-- Exercise 2: Eliminating Duplicates Using DISTINCT
+-- Exercise 3: Using Table and Column Aliases
+-- Exercise 4: Using a Simple CASE Expression
 
 
 
