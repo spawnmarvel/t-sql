@@ -62,13 +62,54 @@ FROM production.products po
 SELECT product_name, model_year, list_price as price
 FROM production.products
 ORDER BY price
+
 -- Incorrect WHERE with alias
 SELECT product_name, model_year, list_price as price
 FROM production.products
 WHERE price > 10; -- Invalid column name 'price'.
 
+-- Order by column possition
+SELECT product_name, model_year, list_price as price
+FROM production.products
+ORDER BY 3
+
 
 -- Lesson 4 Lesson 4: Writing CASE Expressions
+-- A CASE expression extends the ability of a SELECT clause to manipulate data as it is retrieved. Often when writing a query, you need to substitute a value of a column with another value. 
+
+-- T-SQL CASE  expression return a single value, may be used in SELECT, WHERE / HAVING, ORDER BY
+-- Two forms of CASE
+
+-- Simple CASE:
+-- Compares one value to a list of possible values
+-- Returns first match
+-- If no match, returns value found in optional ELSE clause
+-- If not match and no ELSE, returns NULL
+
+-- Search CASE
+-- Evaluates a set of predicates, or logical expression
+-- Returns value found in THEN clause matching first expresssion that evaluates to TRUE
+
+USE BikeStores
+
+SELECT p.product_name, p.list_price, p.model_year,
+	CASE p.model_year
+		WHEN 2017 THEN 'Old product'
+		WHEN 2018 THEN 'New product'
+		ELSE 'Return product'
+	END AS year_description,
+
+	CASE 
+		WHEN p.list_price < 100 THEN 'Sale'
+		WHEN p.list_price > 300 THEN 'Expensive'
+		ELSE 'Standard'
+	END AS price_description
+FROM production.products p
+ORDER BY 2
+
+
+
+
 
 
 
