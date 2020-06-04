@@ -47,6 +47,35 @@ HAVING COUNT(*)>1
 
 
 -- Lesson 3:	Using Column and Table Aliases
+USE BikeStores
+
+SELECT DISTINCT product_name, model_year
+FROM production.products as po
+
+SELECT DISTINCT product_name, model_year
+FROM production.products po
+
+SELECT po.product_name, po.model_year
+FROM production.products po
+
+-- ORDER BY with alias
+SELECT product_name, model_year, list_price as price
+FROM production.products
+ORDER BY price
+-- Incorrect WHERE with alias
+SELECT product_name, model_year, list_price as price
+FROM production.products
+WHERE price > 10; -- Invalid column name 'price'.
+
+
+-- Lesson 4 Lesson 4: Writing CASE Expressions
+
+
+
+
+
+
+
 
 
 
