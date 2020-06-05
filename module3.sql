@@ -113,8 +113,12 @@ ORDER BY 2
 -- Exercise 3: Using Table and Column Aliases
 -- Exercise 4: Using a Simple CASE Expression
 
+<<<<<<< HEAD
 -- Terminate all T-SQL statements with a semicolon.
 
+=======
+-- clone repos 2
+>>>>>>> ca4825f1c2cf1556618a20f1790baecacf6182ee
 
 
 
