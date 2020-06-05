@@ -113,6 +113,8 @@ ORDER BY 2
 -- Exercise 3: Using Table and Column Aliases
 -- Exercise 4: Using a Simple CASE Expression
 
+-- Terminate all T-SQL statements with a semicolon.
+
 
 
 
