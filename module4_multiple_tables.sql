@@ -1,0 +1,6 @@
+-- Module 4: Querying Multiple Tables
+-- Lesson 1:	Understanding Joins
+-- Lesson 2:	Querying with Inner Joins
+-- Lesson 3:	Querying with Outer Joins
+-- Lesson 4:	Querying with Cross Joins and Self Joins
+-- Lab:	Querying Multiple Tables
