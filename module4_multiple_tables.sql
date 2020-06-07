@@ -19,3 +19,31 @@
 -- Cross, Combines all rows in both tables, creates cartesian product
 -- Inner, Starts with cartesian product, applies filter to match rows between tables based on predicate
 -- Outer , Startes with cartesion product, all rows from designated table preserved, matching rows from other table retrieved. Additional NULLS inserted as placeholders
+
+	
+-- Describe inner joins.
+-- Write queries using inner joins.
+-- Describe the syntax of an inner join.
+
+-- Returns only rows where a match is found on both tables, ON clause in SQL-92 syntax
+
+USE BikeStores
+
+SELECT b.brand_id, b.brand_name, c.brand_id, c.product_name
+FROM production.brands b
+INNER JOIN production.products as c 
+on b.brand_id = c.brand_id
+
+USE BikeStores
+
+SELECT c.customer_id, c.first_name, o.order_id
+FROM sales.customers as c
+INNER JOIN sales.orders as o
+on c.customer_id = o.customer_id
+
+-- the FROM clause will be processed before the SELECT clause and an alias of b
+-- The Join designates the production.products as the other table as caluse
+-- The result, A list of customer who have placed orders, not placed order then they are filtered out with the ON
+
+-- Lesson 3
+-- Querying with Outer Joins
