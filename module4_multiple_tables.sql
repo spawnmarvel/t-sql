@@ -242,6 +242,19 @@ ON e.staff_id = m.manager_id
 
 -- Lab: Querying Multiple Tables
 
+-- Exercise 1: Writing Queries That Use Inner Joins
+SELECT
+p.productname, c.categoryname
+FROM Production.Products AS p
+INNER JOIN Production.Categories AS c ON p.categoryid = c.categoryid;
+
+
+SELECT
+c.custid, c.contactname, o.orderid, d.productid, d.qty, d.unitprice
+FROM Sales.Customers AS c
+INNER JOIN Sales.Orders AS o ON c.custid = o.custid
+INNER JOIN Sales.OrderDetails AS d ON d.orderid = o.orderid;
+
 -- Task 2: Write a Query That Uses a Self Join
 
 -- Copy the SELECT statement from task 1 and modify it to include additional columns for the manager information (
@@ -251,9 +264,9 @@ ON e.staff_id = m.manager_id
 
 SELECT e.empid, e.lastname.......m.lastname as mgrlastname, m.firstname as mgrfirstname
 FROM HR.Employees e
-LEFT OUTER JOIN HR.Employees ma
+INNER JOIN HR.Employees m
 ON e.mgrid = m.empid
-WHERE e.mgrid IS NOT NULL
+--WHERE e.mgrid IS NOT NULL
 
 
 -- Task 1: Write a SELECT Statement That Uses an Outer Join
