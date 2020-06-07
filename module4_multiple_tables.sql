@@ -28,6 +28,9 @@
 -- Returns only rows where a match is found on both tables, ON clause in SQL-92 syntax
 -- Matches rows based on attributes suplied in predicate(true/false)
 
+delete from sales.orders where  customer_id = 3
+delete from sales.orders where  customer_id = 2
+-- Deleted so know what customers does not have an order
 
 USE BikeStores
 
@@ -61,9 +64,6 @@ on c.customer_id = o.customer_id
 -- Querying with Outer Joins
 
 -- Returns all rows from one table and any matching rows from a second table
-delete from sales.orders where  customer_id = 3
-delete from sales.orders where  customer_id = 2
--- Deleted sowe know what customers did doed not have an order
 
 -- You have two tables. You want to write a query to return all rows from the first table and only matches from the second table. Which of the following should you use? 
 -- FROM t1 LEFT OUTER JOIN t2 ON t1.col = t2.col
@@ -121,6 +121,139 @@ ORDER BY c.customer_id
 --
 --2	Kasha	NULL	NULL
 --3	Tameka	NULL	NULL
+
+-- Lesson 4 Querying with Cross Joins and Self Joins
+
+--Cross join queries create a Cartesian product that, as you have learned in this module so far, are to be avoided. 
+-- 
+SELECT c.customer_id, c.first_name, o.order_id, o.order_date
+FROM sales.customers as c
+CROSS JOIN sales.orders as o
+
+-- Cross Join Syntax
+-- No matching performed, on ON clause used
+-- Return all rows frol left table combined with each row from right table
+-- ANSI SQL-92
+SELECT ...
+FROM t1 CROSS JOIN t2
+
+-- The followoing is a to create all combinations of the two sets:
+USE BikeStores
+
+SELECT h.id, h.fullname
+FROM hr.employees as h
+--
+--id	fullname
+--1	John Doe
+--2	Jane Doe
+--3	Michael Scott
+--4	Jack Sparrow
+
+USE BikeStores
+
+SELECT h.id, h.fullname
+FROM hr.employees as h
+CROSS JOIN hr.employees all_combinations
+
+--
+--id	fullname
+--1	John Doe
+--2	Jane Doe
+--3	Michael Scott
+--4	Jack Sparrow
+--1	John Doe
+--2	Jane Doe
+--3	Michael Scott
+--4	Jack Sparrow
+--1	John Doe
+--2	Jane Doe
+--3	Michael Scott
+--4	Jack Sparrow
+--1	John Doe
+--2	Jane Doe
+--3	Michael Scott
+--4	Jack Sparrow
+
+-- Understanding Self Joins
+-- return all employees
+USE BikeStores
+SELECT e.staff_id, e.first_name as emp_first_name, e.last_name emp_last_name
+FROM sales.staffs e
+
+
+--staff_id	emp_first_name	emp_last_name
+--1	Fabiola	Jackson
+--2	Mireya	Copeland
+--3	Genna	Serrano
+--4	Virgie	Wiggins
+--5	Jannette	David
+--6	Marcelene	Boyer
+--7	Venita	Daniel
+--8	Kali	Vargas
+--9	Layla	Terrell
+--10	Bernardine	Houston
+
+
+-- Return all employees with ID of employees mananger whene a manager exists
+
+USE BikeStores
+SELECT e.staff_id, e.first_name as emp_first_name, e.last_name emp_last_name, e.manager_id
+
+FROM sales.staffs e
+JOIN sales.staffs m
+ON e.staff_id = m.manager_id
+
+--
+--staff_id	emp_first_name	emp_last_name	manager_id
+--1	Fabiola	Jackson	NULL
+--2	Mireya	Copeland	1
+--2	Mireya	Copeland	1
+--1	Fabiola	Jackson	NULL
+--5	Jannette	David	1
+--5	Jannette	David	1
+--1	Fabiola	Jackson	NULL
+--7	Venita	Daniel	5
+--7	Venita	Daniel	5
+
+-- Return all employees with ID of manager (outer join) This will return NULL for the CEO
+USE BikeStores
+SELECT e.staff_id, e.first_name as emp_first_name, e.last_name emp_last_name, e.manager_id
+
+FROM sales.staffs e
+LEFT OUTER JOIN sales.staffs m
+ON e.staff_id = m.manager_id
+
+--staff_id	emp_first_name	emp_last_name	manager_id
+--1	Fabiola	Jackson	NULL
+--1	Fabiola	Jackson	NULL
+--1	Fabiola	Jackson	NULL
+--2	Mireya	Copeland	1
+--2	Mireya	Copeland	1
+--3	Genna	Serrano	2
+--4	Virgie	Wiggins	2
+--5	Jannette	David	1
+--5	Jannette	David	1
+--6	Marcelene	Boyer	5
+--7	Venita	Daniel	5
+--7	Venita	Daniel	5
+--8	Kali	Vargas	1
+--9	Layla	Terrell	7
+--10	Bernardine	Houston	7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
