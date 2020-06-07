@@ -22,5 +22,44 @@
 -- Data filtered server-side
 -- Can reduce network traffic and client memory usage
 
+-- Each column is independently for the other column
+SELECT [customer_id]
+      ,[first_name]
+      ,[last_name]
+      ,[city]
+      ,[state]
+      ,[zip_code]
+  FROM [BikeStores].[sales].[customers]
+  
+  
+ --
+-- customer_id	first_name	last_name	city	state	zip_code
+--1	Debra	Burks	Orchard Park	NY	14127
+--2	Kasha	Todd	Campbell	CA	95008
+--3	Tameka	Fisher	Redondo Beach	CA	90278
+--4	Daryl	Spence	Uniondale	NY	11553
+
+SELECT [customer_id]
+      ,[first_name]
+      ,[last_name]
+      ,[city]
+      ,[state]
+      ,[zip_code]
+  FROM [BikeStores].[sales].[customers]
+  ORDER BY first_name
+  
+ --
+ --customer_id	first_name	last_name	city	state	zip_code
+--1174	Aaron	Knapp	Yonkers	NY	10701
+--338	Abbey	Pugh	Forest Hills	NY	11375
+--75	Abby	Gamble	Amityville	NY	11701
+--1224	Abram	Copeland	Harlingen	TX	78552
+--673	Adam	Henderson	Los Banos	CA	93635
+--1085	Adam	Thornton	Central Islip	NY	11722
+
+
+-- Lesson 2 Filtering Data with Predicates
+
+
 
 
