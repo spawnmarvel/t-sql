@@ -132,7 +132,7 @@ CROSS JOIN sales.orders as o
 
 -- Cross Join Syntax
 -- No matching performed, on ON clause used
--- Return all rows frol left table combined with each row from right table
+-- Return all rows from left table combined with each row from right table
 -- ANSI SQL-92
 SELECT ...
 FROM t1 CROSS JOIN t2
@@ -239,6 +239,55 @@ ON e.staff_id = m.manager_id
 --8	Kali	Vargas	1
 --9	Layla	Terrell	7
 --10	Bernardine	Houston	7
+
+-- Lab: Querying Multiple Tables
+
+-- Task 2: Write a Query That Uses a Self Join
+
+-- Copy the SELECT statement from task 1 and modify it to include additional columns for the manager information (
+-- lastname, firstname) using a self join. Assign the aliases mgrlastname and mgrfirstname respectively, 
+--to distinguish the manager names from the employee names.
+
+
+SELECT e.empid, e.lastname.......m.lastname as mgrlastname, m.firstname as mgrfirstname
+FROM HR.Employees e
+LEFT OUTER JOIN HR.Employees ma
+ON e.mgrid = m.empid
+WHERE e.mgrid IS NOT NULL
+
+
+-- Task 1: Write a SELECT Statement That Uses an Outer Join
+-- Write a SELECT statement to retrieve the custid and contactname columns from the Sales.Customers table and the orderid column from the Sales.Orders table. 
+-- The statement should retrieve all rows from the Sales.Customers table.
+
+SELECT s.custid,s.contactname, o.orderid
+FROM Sales.Customers s
+LEFT OUTER JOIN Sales.Orders o
+ON s.custid = o.custid
+
+-- Exercise 5: Writing Queries That Use Cross Joins
+
+SELECT e.empid, e.firstname, e.lastname, c.calendardate
+FROM HR.Employees e
+CROSS JOIN HR.Calendar c
+
+
+-- Which type of join should you use to explicitly create a Cartesian product?
+-- CROSS
+-- What is a characteristic of the FROM clause?
+-- It creates and populates a virtual table
+-- Which of the following does NOT apply to outer joins?
+-- Outer join queries return the same result, regardless of the order in which tables are listed and joined = FALSE
+-- Which ANSI standard includes tables joined by a JOIN operator in a FROM clause?
+-- ANSI SQL-92
+
+
+‌
+
+
+
+
+
 
 
 
