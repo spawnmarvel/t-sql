@@ -59,6 +59,17 @@ SELECT [customer_id]
 
 
 -- Lesson 2 Filtering Data with Predicates
+-- WHERE clause syntax
+WHERE <search_condition>
+-- Typical
+WHERE <column> <operator> <expression>
+-- Example
+SELECT contactname, country
+FROM Sales.Customers
+WHERE country = 'Spain';
+
+
+
 
 
 
