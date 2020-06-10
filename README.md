@@ -20,11 +20,11 @@ https://www.bouvet.no/kurs/kategorier/microsoft/sql-server/20761-querying-data-w
 
 ### Code
 
--- Case
+```
 SELECT...[..],
 	CASE
 		WHEN p.categoryid IN (1, 7, 8) THEN 'Campaign Products'
 		ELSE 'Non-Campaign Products'
 	END AS iscampaign
-
 FROM Production.Products AS p;
+```
