@@ -18,7 +18,7 @@ OD20761C - Querying Data with Transact-SQL
 [data bikestore] https://www.sqlservertutorial.net/load-sample-database/
 
 #### Create (first tables):
-```
+``` sql
 -- create schemas
 CREATE SCHEMA production;
 go
