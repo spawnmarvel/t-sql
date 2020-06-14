@@ -72,3 +72,4 @@ SELECT p.categoryid -- [..],
 	END AS iscampaign
 FROM Production.Products AS p;
 ```
+#### Join
