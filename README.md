@@ -44,7 +44,7 @@ CREATE TABLE production.products (
 );
 ```
 #### Insert (first tables):
-```
+``` sql
 use BikeStores;
 
 SET IDENTITY_INSERT production.brands ON;  
@@ -64,8 +64,8 @@ INSERT INTO production.categories(category_id,category_name) VALUES(2,'Comfort B
 SET IDENTITY_INSERT production.categories OFF;  
 ```
 #### Case
-```
-SELECT...[..],
+``` sql
+SELECT p.categoryid -- [..],
 	CASE
 		WHEN p.categoryid IN (1, 7, 8) THEN 'Campaign Products'
 		ELSE 'Non-Campaign Products'
