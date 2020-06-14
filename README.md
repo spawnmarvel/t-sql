@@ -43,6 +43,26 @@ CREATE TABLE production.products (
 	FOREIGN KEY (brand_id) REFERENCES production.brands (brand_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+#### Insert (first tables):
+```
+use BikeStores;
+
+SET IDENTITY_INSERT production.brands ON;  
+
+INSERT INTO production.brands(brand_id,brand_name) VALUES(1,'Electra')
+INSERT INTO production.brands(brand_id,brand_name) VALUES(2,'Haro')
+INSERT INTO production.brands(brand_id,brand_name) VALUES(3,'Heller')
+-- and more [...]
+
+SET IDENTITY_INSERT production.brands OFF;  
+
+SET IDENTITY_INSERT production.categories ON;  
+INSERT INTO production.categories(category_id,category_name) VALUES(1,'Children Bicycles')
+INSERT INTO production.categories(category_id,category_name) VALUES(2,'Comfort Bicycles')
+-- and more [...]
+
+SET IDENTITY_INSERT production.categories OFF;  
+```
 #### Case
 ```
 SELECT...[..],
