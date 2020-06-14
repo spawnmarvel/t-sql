@@ -14,6 +14,9 @@ OD20761C - Querying Data with Transact-SQL
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
 
 ### Code
+#### The bikestores database
+[data bikestore] https://www.sqlservertutorial.net/load-sample-database/
+####Create:
 ```
 -- create schemas
 CREATE SCHEMA production;
@@ -39,6 +42,7 @@ CREATE TABLE production.products (
 	FOREIGN KEY (brand_id) REFERENCES production.brands (brand_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+#### Case
 ```
 SELECT...[..],
 	CASE
