@@ -72,4 +72,4 @@ FROM Production.Products AS p;
 ```
 #### Join
 
-changed pc
+changed pc, 22
