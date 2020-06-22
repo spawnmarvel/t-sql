@@ -72,4 +72,7 @@ FROM Production.Products AS p;
 ```
 #### Join
 
-changed pc, 22
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN
+CROSS JOIN
