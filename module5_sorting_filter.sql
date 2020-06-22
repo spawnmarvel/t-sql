@@ -66,7 +66,10 @@ WHERE <column> <operator> <expression>
 -- Example
 SELECT contactname, country
 FROM Sales.Customers
-WHERE country = 'Spain';
+WHERE country = 'Spain'; 
+
+-- WHERE orderdate > 'date'
+-- WHERE orderdate >= 'date' AND orderdate < 'date'
 
 
 
