@@ -158,7 +158,6 @@ REFERENCES students (s_id)
 ##### INNER JOIN
 
 ``` sql
-use test;
 SELECT st.s_id
       ,st.s_name
       ,st.s_age
