@@ -86,7 +86,57 @@ FROM Production.Products AS p;
 ```
 #### Join
 
-INNER JOIN
-LEFT JOIN
-RIGHT JOIN
-CROSS JOIN
+## Consider the following tables:
+``` sql
+USE [test]
+GO
+
+/****** Object:  Table [learn].[students]    Script Date: 6/23/2020 6:11:57 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [learn].[students](
+	[s_id] [int] IDENTITY(1,1) NOT NULL,
+	[s_name] [varchar](100) NOT NULL,
+	[s_age] [tinyint] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[s_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+USE [test]
+GO
+
+/****** Object:  Table [learn].[fee]    Script Date: 6/23/2020 6:13:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [learn].[fee](
+	[f_id] [int] IDENTITY(1,1) NOT NULL,
+	[s_id] [int] NOT NULL,
+	[f_course] [varchar](30) NULL,
+	[f_paid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[f_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [learn].[fee]  WITH CHECK ADD FOREIGN KEY([s_id])
+REFERENCES [learn].[students] ([s_id])
+GO
+
+
+
+```
+
+
