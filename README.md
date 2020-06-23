@@ -86,7 +86,7 @@ FROM Production.Products AS p;
 ```
 #### Join
 
-## Consider the following tables:
+#### Consider the following tables:
 ``` sql
 
 
@@ -128,13 +128,19 @@ REFERENCES students (s_id)
 SELECT st.s_id
       ,st.s_name
       ,st.s_age
+	  ,fe.f_course
+	  ,fe.f_paid
   FROM students AS st
   INNER JOIN fee AS fe ON st.s_id = fe.s_id
 ```
-#### DATA
-* id	s_name	s_age
-* Jim Town	30
-* Lisa Fresh	28
+#### DATA, We can tell the students who have paid their fee
+
+* s_id	s_name	s_age	f_course	f_paid
+* 1	Jim Town	30	IT	200
+* 3	Lisa Fresh	28	IT	200
+#### LEFT JOIN
+
+
 
 
 
