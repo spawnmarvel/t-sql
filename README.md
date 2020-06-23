@@ -134,10 +134,9 @@ SELECT st.s_id
   INNER JOIN fee AS fe ON st.s_id = fe.s_id
 ```
 #### Data, We can tell the students who have paid their fee
-
-* s_id	s_name	s_age	f_course	f_paid
-* 1	Jim Town	30	IT	200
-* 3	Lisa Fresh	28	IT	200
+* s_id	s_name	s_age	s_id	f_course	f_paid
+1	Jim Town	30	1	IT	200
+3	Lisa Fresh	28	3	IT	200
 
 #### LEFT JOIN
 
@@ -155,10 +154,11 @@ SELECT st.s_id
 #### Data, This type of join will return all rows from the left-hand table plus records in the right-hand table with matching values
 
 * s_id	s_name	s_age	f_course	f_paid
-* 1	Jim Town	30	IT	200
-* 2	Tim Door	29	NULL	NULL
-* 3	Lisa Fresh	28	IT	200
-* 4	Ida Back	28	NULL	NULL
+* 1	Jim Town	30	1	IT	200
+* 2	Tim Door	29	NULL	NULL	NULL
+* 3	Lisa Fresh	28	3	IT	200
+* 4	Ida Back	28	NULL	NULL	NULL
+
 
 
 #### RIGHT JOIN
@@ -175,12 +175,30 @@ SELECT st.s_id
 ```
 
 #### Data,This type of join returns all rows from the right-hand table and only those with matching values in the left-hand table
-
 * s_id	s_name	s_age	f_course	f_paid
-* 1	Jim Town	30	IT	200
-* 3	Lisa Fresh	28	IT	200
+* 1	Jim Town	30	1	IT	200
+* 3	Lisa Fresh	28	3	IT	200
 
 
 
+#### FULL JOIN
+
+``` sql
+SELECT st.s_id
+      ,st.s_name
+      ,st.s_age
+	  ,fe.f_course
+	  ,fe.f_paid
+  FROM students AS st
+  FULL JOIN fee AS fe ON st.s_id = fe.s_id
+  --WHERE fe.f_paid IS NOT NULL
+```
+#### Data,This type of join returns all rows from both tables with NULL values where the JOIN condition is not true
+
+* s_id	s_name	s_age	s_id	f_course	f_paid
+* 1	Jim Town	30	1	IT	200
+* 2	Tim Door	29	NULL	NULL	NULL
+* 3	Lisa Fresh	28	3	IT	200
+* 4	Ida Back	28	NULL	NULL	NULL
 
 
