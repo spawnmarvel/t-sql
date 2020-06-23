@@ -15,6 +15,22 @@ Querying Data with Transact-SQL
 #### The bikestores database
 [data bikestore] https://www.sqlservertutorial.net/load-sample-database/
 
+
+
+#### Schema 
+##### A SQL database contains multiple objects such as tables, views, stored procedures, functions, indexes, triggers. We define SQL Schema as a logical collection of database objects. A user owns that owns the schema is known as schema owner. It is a useful mechanism to segregate database objects for different applications, access rights, managing security administration of databases. We do not have any restrictions on the number of objects in a schema.
+* We can quickly transfer ownership of a SQL schema to another user
+* We can share a schema among multiple users
+* It allows you to move database objects among the schemas
+* We get more control over database objects access and security
+
+
+##### If we do not define any default schema for a user, SQL Server assumes dbo as the default schema. We can verify the default schema for a user using the following system function: 
+
+``` sql
+SELECT SCHEMA_NAME():
+````
+
 #### Create (first tables):
 ``` sql
 -- create schemas
