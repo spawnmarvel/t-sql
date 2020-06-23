@@ -117,8 +117,24 @@ REFERENCES students (s_id)
 * 3	Lisa Fresh	28
 * 4	Ida Back	28
 
-#### DATA Students
+#### DATA fee
+* f_id	s_id	f_course	f_paid
+* 1	1	IT	200
+* 2	3	IT	200
 
+#### INNER JOIN
+
+``` sql
+SELECT st.s_id
+      ,st.s_name
+      ,st.s_age
+  FROM students AS st
+  INNER JOIN fee AS fe ON st.s_id = fe.s_id
+```
+#### DATA
+* id	s_name	s_age
+* Jim Town	30
+* Lisa Fresh	28
 
 
 
