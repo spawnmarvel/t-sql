@@ -111,11 +111,13 @@ ALTER TABLE fee ADD FOREIGN KEY(s_id)
 REFERENCES students (s_id)
 ```
 #### DATA Students
-#### s_id	s_name	s_age
-#### 1	Jim Town	30
-#### 2	Tim Door	29
-#### 3	Lisa Fresh	28
-#### 4	Ida Back	28
+* s_id	s_name	s_age
+* 1	Jim Town	30
+* 2	Tim Door	29
+* 3	Lisa Fresh	28
+* 4	Ida Back	28
+
+#### DATA Students
 
 
 
