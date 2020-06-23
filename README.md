@@ -96,26 +96,26 @@ SET IDENTITY_INSERT production.categories OFF;
 ```
 ##### Case
 ``` sql
--- CASE
-SELECT p.categoryid, p.productname,
+use BikeStores;
+SELECT p.category_id, p.product_name,
 	CASE
-		WHEN p.categoryid = 1 THEN 'Beverages'
-		WHEN p.categoryid = 2 THEN 'Condiments'
-		WHEN p.categoryid = 3 THEN 'Confections'
-		WHEN p.categoryid = 4 THEN 'Dairy Products'
-		WHEN p.categoryid = 5 THEN 'Grains/Cereals'
-		WHEN p.categoryid = 6 THEN 'Meat/Poultry'
-		WHEN p.categoryid = 7 THEN 'Produce'
-		WHEN p.categoryid = 8 THEN 'Seafood'
+		WHEN p.category_id = 1 THEN 'Beverages'
+		WHEN p.category_id = 2 THEN 'Condiments'
+		WHEN p.category_id = 3 THEN 'Confections'
+		WHEN p.category_id = 4 THEN 'Dairy Products'
+		WHEN p.category_id = 5 THEN 'Grains/Cereals'
+		WHEN p.category_id = 6 THEN 'Meat/Poultry'
+		WHEN p.category_id = 7 THEN 'Produce'
+		WHEN p.category_id = 8 THEN 'Seafood'
 		ELSE 'Other'
 	END AS categoryname,
 
 	CASE
-		WHEN p.categoryid IN (1, 7, 8) THEN 'Campaign Products'
+		WHEN p.category_id IN (1, 7, 8) THEN 'Campaign Products'
 		ELSE 'Non-Campaign Products'
 	END AS iscampaign
 
-FROM Production.Products AS p;
+FROM production.products AS p;
 ```
 ##### Join
 
@@ -143,7 +143,7 @@ GO
 ALTER TABLE fee ADD FOREIGN KEY(s_id)
 REFERENCES students (s_id)
 ```
-##### Data Students
+##### Data students
 * s_id	s_name	s_age
 * 1	Jim Town	30
 * 2	Tim Door	29
@@ -158,6 +158,7 @@ REFERENCES students (s_id)
 ##### INNER JOIN
 
 ``` sql
+use test;
 SELECT st.s_id
       ,st.s_name
       ,st.s_age
