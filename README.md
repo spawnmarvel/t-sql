@@ -7,12 +7,12 @@ Querying Data with Transact-SQL
 
 [Markdown Github] https://guides.github.com/features/mastering-markdown/
 
-## Tips
+##### Tips
 * Show line numbers. Tools-> Options->Text Editor->Transact-SQL->General
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
 
 ### Code
-#### The bikestores database
+##### The bikestores database
 [data bikestore] https://www.sqlservertutorial.net/load-sample-database/
 
 
@@ -31,7 +31,7 @@ Querying Data with Transact-SQL
 SELECT SCHEMA_NAME():
 ````
 
-#### Create (first tables):
+##### Create (first tables):
 ``` sql
 -- create schemas
 CREATE SCHEMA production;
@@ -57,7 +57,7 @@ CREATE TABLE production.products (
 	FOREIGN KEY (brand_id) REFERENCES production.brands (brand_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
-#### Insert (first tables):
+##### Insert (first tables):
 ``` sql
 use BikeStores;
 
@@ -77,7 +77,7 @@ INSERT INTO production.categories(category_id,category_name) VALUES(2,'Comfort B
 
 SET IDENTITY_INSERT production.categories OFF;  
 ```
-#### Case
+##### Case
 ``` sql
 -- CASE
 SELECT p.categoryid, p.productname,
@@ -100,9 +100,9 @@ SELECT p.categoryid, p.productname,
 
 FROM Production.Products AS p;
 ```
-#### Join
+##### Join
 
-#### Consider the following tables:
+##### Consider the following tables:
 ``` sql
 
 
@@ -126,19 +126,19 @@ GO
 ALTER TABLE fee ADD FOREIGN KEY(s_id)
 REFERENCES students (s_id)
 ```
-#### DATA Students
+##### Data Students
 * s_id	s_name	s_age
 * 1	Jim Town	30
 * 2	Tim Door	29
 * 3	Lisa Fresh	28
 * 4	Ida Back	28
 
-#### DATA fee
+##### Data fee
 * f_id	s_id	f_course	f_paid
 * 1	1	IT	200
 * 2	3	IT	200
 
-#### INNER JOIN
+##### INNER JOIN
 
 ``` sql
 SELECT st.s_id
@@ -149,13 +149,13 @@ SELECT st.s_id
   FROM students AS st
   INNER JOIN fee AS fe ON st.s_id = fe.s_id
 ```
-#### Data, We can tell the students who have paid their fee
+##### Data, We can tell the students who have paid their fee
 * s_id	s_name	s_age	s_id	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
 * 3	Lisa Fresh	28	3	IT	200
  
 
-#### LEFT JOIN
+##### LEFT JOIN
 
 ``` sql
 SELECT st.s_id
@@ -168,7 +168,7 @@ SELECT st.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
 
-#### Data, This type of join will return all rows from the left-hand table plus records in the right-hand table with matching values
+##### Data, This type of join will return all rows from the left-hand table plus records in the right-hand table with matching values
 
 * s_id	s_name	s_age	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
@@ -178,7 +178,7 @@ SELECT st.s_id
 
 
 
-#### RIGHT JOIN
+##### RIGHT JOIN
 
 ``` sql
 SELECT st.s_id
@@ -191,14 +191,14 @@ SELECT st.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
 
-#### Data,This type of join returns all rows from the right-hand table and only those with matching values in the left-hand table
+##### Data,This type of join returns all rows from the right-hand table and only those with matching values in the left-hand table
 * s_id	s_name	s_age	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
 * 3	Lisa Fresh	28	3	IT	200
 
 
 
-#### FULL JOIN
+##### FULL JOIN
 
 ``` sql
 SELECT st.s_id
@@ -210,7 +210,7 @@ SELECT st.s_id
   FULL JOIN fee AS fe ON st.s_id = fe.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
-#### Data,This type of join returns all rows from both tables with NULL values where the JOIN condition is not true
+##### Data,This type of join returns all rows from both tables with NULL values where the JOIN condition is not true
 
 * s_id	s_name	s_age	s_id	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
