@@ -46,7 +46,7 @@ CREATE TABLE [factory].[cars] -- is stored in factory
  Name VARCHAR(20)
 );
 ````
-#### A SQL schema is a useful database concept. It helps us to create a logical grouping of objects such as tables, stored procedures, and functions. 
+##### A SQL schema is a useful database concept. It helps us to create a logical grouping of objects such as tables, stored procedures, and functions. 
 
 ##### Create (first tables):
 ``` sql
