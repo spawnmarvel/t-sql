@@ -7,7 +7,7 @@ Querying Data with Transact-SQL
 
 [Markdown Github] https://guides.github.com/features/mastering-markdown/
 
-##### Tips
+### Tips
 * Show line numbers. Tools-> Options->Text Editor->Transact-SQL->General
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
 
