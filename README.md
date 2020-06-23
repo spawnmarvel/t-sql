@@ -26,10 +26,27 @@ Querying Data with Transact-SQL
 
 
 ##### If we do not define any default schema for a user, SQL Server assumes dbo as the default schema. We can verify the default schema for a user using the following system function: 
+##### If no schema is specified, it automatically uses dbo schema for the table because the current user default schema is dbo
 
 ``` sql
-SELECT SCHEMA_NAME():
+--SELECT SCHEMA_NAME();
+--USE test -- can create schema in spesific database
+--go
+
+CREATE TABLE cars( --is stored in dbo
+ ID   INT IDENTITY(1, 1), 
+ Name VARCHAR(20)
+);
+go
+
+CREATE SCHEMA factory;
+go
+CREATE TABLE [factory].[cars] -- is stored in factory
+(ID   INT IDENTITY(1, 1), 
+ Name VARCHAR(20)
+);
 ````
+#### A SQL schema is a useful database concept. It helps us to create a logical grouping of objects such as tables, stored procedures, and functions. 
 
 ##### Create (first tables):
 ``` sql
