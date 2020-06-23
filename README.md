@@ -135,8 +135,9 @@ SELECT st.s_id
 ```
 #### Data, We can tell the students who have paid their fee
 * s_id	s_name	s_age	s_id	f_course	f_paid
-1	Jim Town	30	1	IT	200
-3	Lisa Fresh	28	3	IT	200
+* 1	Jim Town	30	1	IT	200
+* 3	Lisa Fresh	28	3	IT	200
+ 
 
 #### LEFT JOIN
 
