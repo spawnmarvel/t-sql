@@ -29,3 +29,5 @@ SELECT CAST(1234 AS BINARY(4)) as result
 
 -- 0x000004D2
 
+--
+
