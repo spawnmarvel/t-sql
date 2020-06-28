@@ -104,6 +104,162 @@ Completion time: 2020-06-28T20:14:46.6610969+02:00
 -- UNICODE, 2 bute pr character system
 -- Single byte:
 -- Char, varchar
+-- one byte stored per character. only 256 possible characters, limits langauage support
+
+-- Multi byte:
+-- nchar, nvarchare
+-- Multiple bytes stored per characters (usullay 2 bytes , but sometimes 4)
+-- data type, fixed width, variable with, single byte charactes, multi byte characters
+-- char,yes,no,yes,no
+-- nchhar, yes, no, no, yes
+-- varchar, no, yes, yes, no
+-- nvarchar, no, yes, no, yes
+
+--Varchar and nvarchar data types support the storeage of very long strings, with max
+CHAR(n)--1-8000 characters, storage n bytes, padded
+NCHAR(n)--1-4000 characters, storage 2*n bytes, padded
+VARCHAR(n)--1-8000 characters, storage actual length + 2 bytes
+NVARCHAR(n)--1-4000 characters, storage actual length + 2 bytes
+VARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+NVARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+
+-- Single-byte character, marked 'SQL server'
+-- Multi-byte character, marked prefix N, N'SQL Server'
+
+-- Collation
+-- Is a collection of properties for character data
+-- Character set, sort order, case sensitivity, accent sensitivity
+-- When quering, collation is important for comparison
+-- Is the database case-sensitive?
+
+USE BikeStores
+SELECT staff_id, last_name
+FROM sales.staffs
+WHERE last_name COLLATE Latin1_General_CS_AS = 'David';
+--ADD COLLATE caluse to control collation comparison
+
+
+-- This has been set, and in most cases we do not care about this.
+
+
+-- String Concatenation
+USE BikeStores
+SELECT staff_id, CONCAT(first_name,' , ' + last_name) as full_name
+FROM sales.staffs
+WHERE staff_id <3
+-- staff_id	full_name
+-- 1	Fabiola , Jackson
+-- 2	Mireya , Copeland
+-- if first name or last was null, CONCAT converts NULL to empty string, better then use +
+
+-- The LIKE Predicate
+-- % (Percent), LIKE N'Sand%'
+-- _ (Underscore), LIKE N'_a%'
+-- [<List of characters>], LIKE N'[DEF]%', 
+-- [<Character> - <character>], LIKE N'[DEF]%' 
+-- ESCAPE
+
+-- return all f
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like 'F%';
+--staff_id	full_name
+--1	Fabiola; Jackson
+
+-- return second char is i
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like '_I%';
+-- staff_id	full_name
+-- 2	Mireya; Copeland
+-- 4	Virgie; Wiggins
+-- retunr any strings that starts with f, i or b
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like '[FIB]%';
+-- staff_id	full_name
+-- 1	Fabiola; Jackson
+-- 10	Bernardine; Houston
+
+-- Examples:
+
+-- Default collation is case insensitive
+SELECT  customer_id,first_name, last_name
+FROM [BikeStores].[sales].[customers]
+WHERE last_name   = 'Burks' -- = 'burks' works either way
+
+SELECT  customer_id,first_name, last_name
+FROM [BikeStores].[sales].[customers]
+WHERE last_name COLLATE Latin1_GENERAL_CS_AS  = 'Burks'--works, but = 'burks' does not work
+
+-- CONCAT and +
+SELECT  customer_id, first_name + ' ' + last_name as name_
+FROM [BikeStores].[sales].[customers]
+
+SELECT  customer_id, CONCAT(first_name, ' ', last_name)as name_
+FROM [BikeStores].[sales].[customers]
+
+-- FORMAT
+DECLARE @m money = 120.595
+SELECT @m AS unformatted_value,
+FORMAT(@m, 'C', 'zh-cn') AS zh_cn_currency,
+FORMAT(@m, 'C', 'en-us') AS en_us_currency,
+FORMAT(@m, 'C', 'de-de') AS de_de_currency;
+-- unformatted_value	zh_cn_currency	en_us_currency	de_de_currency
+-- 120.595	¥120.60	$120.60	120,60 €
+
+--SUBSTRING
+SELECT SUBSTRING('This is not a company',14, 8) as result;
+-- company
+
+--LEN, rm whitespace
+SELECT LEN('This is not a company     ') as result;
+-- 21
+--DATALENGTH, num of bytes
+SELECT DATALENGTH('This is not a company     ') as result;
+-- 26
+
+-- CHARINDEX
+SELECT CHARINDEX('not','This is not a company') as result;
+-- 9
+
+--REPLACE
+SELECT REPLACE('This is not a company', 'not', 'good') as result;
+-- This is good a company
+
+SELECT UPPER('This is not a company') as result;
+-- THIS IS NOT A COMPANY
+SELECT LOWER('This is not a company') as result;
+
+
+SELECT first_name
+FROM sales.customers
+WHERE state like 'C%'
+
+SELECT first_name
+FROM sales.customers
+WHERE state like N'C%'
+
+
+--The "N" prefix stands for National Language in the SQL-92 standard, and is used for representing 
+-- unicode characters. Any time you pass Unicode data to SQL Server you must prefix the 
+-- Unicode string with N . It is used when the type is from NVARCHAR , NCHAR or NTEXT
+
+-- Lesson 3
+-- Working with Date and Time Data
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
