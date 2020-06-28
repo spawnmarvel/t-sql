@@ -199,7 +199,7 @@ FROM [BikeStores].[sales].[customers]
 SELECT  customer_id, CONCAT(first_name, ' ', last_name)as name_
 FROM [BikeStores].[sales].[customers]
 
--- FORMAT
+-- FORMAT—allows you to format an input value to a character string based on a .NET format string, with an optional culture parameter. 
 DECLARE @m money = 120.595
 SELECT @m AS unformatted_value,
 FORMAT(@m, 'C', 'zh-cn') AS zh_cn_currency,
@@ -231,6 +231,10 @@ SELECT UPPER('This is not a company') as result;
 -- THIS IS NOT A COMPANY
 SELECT LOWER('This is not a company') as result;
 
+SELECT LEFT('Microsoft SQL Server',9) AS left_example,
+RIGHT('Microsoft SQL Server',6) AS right_example;
+--left_example	right_example
+-- Microsoft	Server
 
 SELECT first_name
 FROM sales.customers
@@ -247,6 +251,8 @@ WHERE state like N'C%'
 
 -- Lesson 3
 -- Working with Date and Time Data
+
+
 
 
 
