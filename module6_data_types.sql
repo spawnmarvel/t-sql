@@ -98,7 +98,7 @@ Conversion failed when converting the varchar value 'six  ' to data type int.
 
 Completion time: 2020-06-28T20:14:46.6610969+02:00
 
--- Character Data Types
+-- Lesson 2 Character Data Types
 -- SQL Server support two kinds of character data as fixed-width of variable-width data
 -- ASCI, 1 byte pr character system
 -- UNICODE, 2 bute pr character system
