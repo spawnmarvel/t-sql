@@ -490,6 +490,20 @@ SELECT
 --Daryl	Spence	5	Dar	Daryl Spence
 
 
+SELECT TOP (1000) [customer_id]
+      ,[first_name]
+      ,[last_name]
+	  ,phone
+      ,COALESCE(NULL,phone, 'xxx') -- The SQL Coalesce and IsNull functions are used to handle NULL values. During the expression evaluation process the NULL values are replaced with the user-defined value. 
+  FROM [BikeStores].[sales].[customers]
+--customer_id	first_name	last_name	phone	(No column name)
+--1	Debra	Burks	NULL	xxx
+--2	Kasha	Todd	NULL	xxx
+--3	Tameka	Fisher	NULL	xxx
+--4	Daryl	Spence	NULL	xxx
+--5	Charolette	Rice	(916) 381-6003	(916) 381-6003
+
+
 
 
 
