@@ -80,23 +80,23 @@ DECLARE @my_tiny_int AS TINYINT =25
 DECLARE @my_int AS INT = 9999;
 SELECT @my_tiny_int + @my_int
 -- Result
---10024
+-- 10024
 -- Implicit conversion integer and char
 DECLARE @my_char AS char(5)='6';
 DECLARE @my_int2 AS int = 1;
 SELECT @my_char + @my_int2
 -- Result
---7
+-- 7
 -- SQL Server will automatically attempt to perform an implicit conversion from a lower-precedence data type to a higher-precedence data type. 
 -- Failing
 DECLARE @my_char AS char(5) = 'six';
 DECLARE @my_int AS INT = 1;
 SELECT @my_char + @my_int;
 
---Msg 245, Level 16, State 1, Line 4
---Conversion failed when converting the varchar value 'six  ' to data type int.
+-- Msg 245, Level 16, State 1, Line 4
+-- Conversion failed when converting the varchar value 'six  ' to data type int.
 
---Completion time: 2020-06-28T20:14:46.6610969+02:00
+-- Completion time: 2020-06-28T20:14:46.6610969+02:00
 
 -- Lesson 2 Character Data Types
 -- SQL Server support two kinds of character data as fixed-width of variable-width data
@@ -115,7 +115,7 @@ SELECT @my_char + @my_int;
 -- varchar, no, yes, yes, no
 -- nvarchar, no, yes, no, yes
 
---Varchar and nvarchar data types support the storeage of very long strings, with max
+-- Varchar and nvarchar data types support the storeage of very long strings, with max
 -- CHAR(n)--1-8000 characters, storage n bytes, padded
 -- NCHAR(n)--1-4000 characters, storage 2*n bytes, padded
 -- VARCHAR(n)--1-8000 characters, storage actual length + 2 bytes
@@ -136,7 +136,7 @@ USE BikeStores
 SELECT staff_id, last_name
 FROM sales.staffs
 WHERE last_name COLLATE Latin1_General_CS_AS = 'David';
---ADD COLLATE caluse to control collation comparison
+-- ADD COLLATE caluse to control collation comparison
 
 
 -- This has been set, and in most cases we do not care about this.
@@ -163,8 +163,8 @@ WHERE staff_id <3
 SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
 FROM [BikeStores].[sales].[staffs]
 WHERE first_name like 'F%';
---staff_id	full_name
---1	Fabiola; Jackson
+-- staff_id	full_name
+-- 1	Fabiola; Jackson
 
 -- return second char is i
 SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
@@ -208,11 +208,11 @@ FORMAT(@m, 'C', 'de-de') AS de_de_currency;
 -- unformatted_value	zh_cn_currency	en_us_currency	de_de_currency
 -- 120.595	¥120.60	$120.60	120,60 €
 
---SUBSTRING
+-- SUBSTRING
 SELECT SUBSTRING('This is not a company',14, 8) as result;
 -- company
 
---LEN, rm whitespace
+-- LEN, rm whitespace
 SELECT LEN('This is not a company     ') as result;
 -- 21
 --DATALENGTH, num of bytes
@@ -223,7 +223,7 @@ SELECT DATALENGTH('This is not a company     ') as result;
 SELECT CHARINDEX('not','This is not a company') as result;
 -- 9
 
---REPLACE
+-- REPLACE
 SELECT REPLACE('This is not a company', 'not', 'good') as result;
 -- This is good a company
 
@@ -233,7 +233,7 @@ SELECT LOWER('This is not a company') as result;
 
 SELECT LEFT('Microsoft SQL Server',9) AS left_example,
 RIGHT('Microsoft SQL Server',6) AS right_example;
---left_example	right_example
+-- left_example	right_example
 -- Microsoft	Server
 
 SELECT first_name
@@ -245,7 +245,7 @@ FROM sales.customers
 WHERE state like N'C%'
 
 
---The "N" prefix stands for National Language in the SQL-92 standard, and is used for representing 
+-- The "N" prefix stands for National Language in the SQL-92 standard, and is used for representing 
 -- unicode characters. Any time you pass Unicode data to SQL Server you must prefix the 
 -- Unicode string with N . It is used when the type is from NVARCHAR , NCHAR or NTEXT
 
@@ -307,7 +307,7 @@ SELECT [order_status]
       ,[staff_id]
   FROM [BikeStores].[sales].[orders]
   WHERE order_date = '20070825' -- This will time 00:00:00
---When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
+-- When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
 
 -- Date and Time Functions
 SELECT 
@@ -362,21 +362,21 @@ THEN CONVERT(DATE, checkdate)
 ELSE NULL 
 END AS converteddate
 FROM learn.sqldates
---checkdate	converteddate
---20200101	2020-01-01
---20200202Y	NULL
---20190101	2019-01-01
---20190202Y	NULL
+-- checkdate	converteddate
+-- 20200101	2020-01-01
+-- 20200202Y	NULL
+-- 20190101	2019-01-01
+-- 20190202Y	NULL
 
 SELECT checkdate,
 TRY_CONVERT(date, checkdate)  AS converteddate
 FROM learn.sqldates
 
---checkdate	converteddate
---20200101	2020-01-01
---20200202Y	NULL
---20190101	2019-01-01
---20190202Y	NULL
+-- checkdate	converteddate
+-- 20200101	2020-01-01
+-- 20200202Y	NULL
+-- 20190101	2019-01-01
+-- 20190202Y	NULL
 
 
 
@@ -395,11 +395,11 @@ SELECT [order_id]
   AND DAY(order_date) > 4 
   AND DAY(order_date) < 7
 
---order_id	customer_id	order_status	order_date	required_date	shipped_date	store_id	staff_id
---107	633	4	2016-03-06	2016-03-09	2016-03-09	1	2
---108	12	4	2016-03-06	2016-03-09	2016-03-07	2	6
---109	1255	4	2016-03-06	2016-03-09	2016-03-09	2	6
---110	677	4	2016-03-06	2016-03-08	2016-03-09	3	9
+-- order_id	customer_id	order_status	order_date	required_date	shipped_date	store_id	staff_id
+-- 107	633	4	2016-03-06	2016-03-09	2016-03-09	1	2
+-- 108	12	4	2016-03-06	2016-03-09	2016-03-07	2	6
+-- 109	1255	4	2016-03-06	2016-03-09	2016-03-09	2	6
+-- 110	677	4	2016-03-06	2016-03-08	2016-03-09	3	9
 
 SELECT DISTINCT([customer_id])
   FROM [BikeStores].[sales].[orders]
@@ -417,8 +417,8 @@ SELECT
 CURRENT_TIMESTAMP AS currentdate,
 DATEADD (day, 1, EOMONTH(CURRENT_TIMESTAMP, -1)) AS first_in_month,
 EOMONTH(CURRENT_TIMESTAMP) AS end_in_month;
---currentdate	first_in_month	end_in_month
---2020-06-29 21:38:59.710	2020-06-01	2020-06-30
+-- currentdate	first_in_month	end_in_month
+-- 2020-06-29 21:38:59.710	2020-06-01	2020-06-30
 
 
 
@@ -437,42 +437,42 @@ SELECT ord.[order_id]
   AND YEAR(cur_order.order_date)= 2018 -- in 2018
 
 -- order_id	item_id	product_id	quantity	list_price	product_name	order_date
---1326	2	269	2	199.99	Trek Precaliber 12 Boy's - 2018	2018-01-01
---1334	3	84	2	109.99	Sun Bicycles Lil Kitt'n - 2017	2018-01-07
---1346	5	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-01-14
---1352	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-16
---1353	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-17
---1379	3	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-02-02
+-- 1326	2	269	2	199.99	Trek Precaliber 12 Boy's - 2018	2018-01-01
+-- 1334	3	84	2	109.99	Sun Bicycles Lil Kitt'n - 2017	2018-01-07
+-- 1346	5	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-01-14
+-- 1352	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-16
+-- 1353	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-17
+-- 1379	3	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-02-02
 
 SELECT 
 CONCAT('last name: ',[last_name], ' ; city:' ,[city])
 FROM [BikeStores].[sales].[customers]
 
---last name: Burks ; city:Orchard Park
---last name: Todd ; city:Campbell
---last name: Fisher ; city:Redondo Beach
---last name: Spence ; city:Uniondale
+-- last name: Burks ; city:Orchard Park
+-- last name: Todd ; city:Campbell
+-- last name: Fisher ; city:Redondo Beach
+-- last name: Spence ; city:Uniondale
 
 SELECT 
       [first_name]
       ,[last_name]
   FROM [BikeStores].[sales].[customers]
   WHERE first_name like '[A-B]%'
---first_name	last_name
---Aleta	Shepard
---Adelle	Larsen
---Araceli	Golden
---Brittney	Woodward
+-- first_name	last_name
+-- Aleta	Shepard
+-- Adelle	Larsen
+-- Araceli	Golden
+-- Brittney	Woodward
 
 
 SELECT 
       first_name,
 	  SUBSTRING(first_name, 0,3) as n
   FROM [BikeStores].[sales].[customers]
---first_name	n
---Debra	De
---Kasha	Ka
---Tameka Ta
+-- first_name	n
+-- Debra	De
+-- Kasha	Ka
+-- Tameka Ta
 
 
 SELECT 
@@ -483,11 +483,11 @@ SELECT
 	  ,CONCAT(first_name, ' ', last_name) as full_name
   FROM [BikeStores].[sales].[customers]
 
---first_name	last_name	num	short_name	full_name
---Debra	Burks	5	Deb	Debra Burks
---Kasha	Todd	5	Kas	Kasha Todd
---Tameka	Fisher	6	Tam	Tameka Fisher
---Daryl	Spence	5	Dar	Daryl Spence
+-- first_name	last_name	num	short_name	full_name
+-- Debra	Burks	5	Deb	Debra Burks
+-- Kasha	Todd	5	Kas	Kasha Todd
+-- Tameka	Fisher	6	Tam	Tameka Fisher
+-- Daryl	Spence	5	Dar	Daryl Spence
 
 
 SELECT TOP (1000) [customer_id]
@@ -496,12 +496,12 @@ SELECT TOP (1000) [customer_id]
 	  ,phone
       ,COALESCE(NULL,phone, 'xxx') -- The SQL Coalesce and IsNull functions are used to handle NULL values. During the expression evaluation process the NULL values are replaced with the user-defined value. 
   FROM [BikeStores].[sales].[customers]
---customer_id	first_name	last_name	phone	(No column name)
---1	Debra	Burks	NULL	xxx
---2	Kasha	Todd	NULL	xxx
---3	Tameka	Fisher	NULL	xxx
---4	Daryl	Spence	NULL	xxx
---5	Charolette	Rice	(916) 381-6003	(916) 381-6003
+-- customer_id	first_name	last_name	phone	(No column name)
+-- 1	Debra	Burks	NULL	xxx
+-- 2	Kasha	Todd	NULL	xxx
+-- 3	Tameka	Fisher	NULL	xxx
+-- 4	Daryl	Spence	NULL	xxx
+-- 5	Charolette	Rice	(916) 381-6003	(916) 381-6003
 
 
 
