@@ -338,6 +338,160 @@ SELECT ISDATE('20200629'); -- is valid -- 1
 SELECT ISDATE('20200632'); -- is not valid  -- 0
 
 
+-- Lab: Working with SQL Server 2016 Data Types
+
+SELECT CAST('2081228' AS DATE) AS casted;
+
+SELECT CONVERT(DATE, '12/28/2018', 101) AS converted;
+
+
+
+
+DROP TABLE IF EXISTS learn.sqldates;
+
+CREATE TABLE learn.sqldates(
+checkdate varchar(9)
+);
+
+INSERT INTO learn.sqldates (checkdate)
+values ('20190101'), ('20190202Y') -- + 2020
+
+SELECT checkdate,
+CASE WHEN ISDATE(checkdate) = 1 
+THEN CONVERT(DATE, checkdate) 
+ELSE NULL 
+END AS converteddate
+FROM learn.sqldates
+--checkdate	converteddate
+--20200101	2020-01-01
+--20200202Y	NULL
+--20190101	2019-01-01
+--20190202Y	NULL
+
+SELECT checkdate,
+TRY_CONVERT(date, checkdate)  AS converteddate
+FROM learn.sqldates
+
+--checkdate	converteddate
+--20200101	2020-01-01
+--20200202Y	NULL
+--20190101	2019-01-01
+--20190202Y	NULL
+
+
+
+
+SELECT [order_id]
+      ,[customer_id]
+      ,[order_status]
+      ,[order_date]
+      ,[required_date]
+      ,[shipped_date]
+      ,[store_id]
+      ,[staff_id]
+  FROM [BikeStores].[sales].[orders]
+  WHERE YEAR(order_date) = 2016
+  AND MONTH(order_date) = 3
+  AND DAY(order_date) > 4 
+  AND DAY(order_date) < 7
+
+--order_id	customer_id	order_status	order_date	required_date	shipped_date	store_id	staff_id
+--107	633	4	2016-03-06	2016-03-09	2016-03-09	1	2
+--108	12	4	2016-03-06	2016-03-09	2016-03-07	2	6
+--109	1255	4	2016-03-06	2016-03-09	2016-03-09	2	6
+--110	677	4	2016-03-06	2016-03-08	2016-03-09	3	9
+
+SELECT DISTINCT([customer_id])
+  FROM [BikeStores].[sales].[orders]
+  WHERE YEAR(order_date) = 2016
+  AND MONTH(order_date) = 3
+  AND DAY(order_date) > 4 
+  AND DAY(order_date) < 7
+-- 12
+-- 633
+-- 677
+-- 1255
+
+
+SELECT
+CURRENT_TIMESTAMP AS currentdate,
+DATEADD (day, 1, EOMONTH(CURRENT_TIMESTAMP, -1)) AS first_in_month,
+EOMONTH(CURRENT_TIMESTAMP) AS end_in_month;
+--currentdate	first_in_month	end_in_month
+--2020-06-29 21:38:59.710	2020-06-01	2020-06-30
+
+
+
+SELECT ord.[order_id]
+      ,ord.[item_id]
+      ,ord.[product_id]
+      ,ord.[quantity]
+      ,ord.[list_price]
+     ,pp.product_name
+	 ,cur_order.order_date
+  FROM [BikeStores].[sales].[order_items] ord
+  INNER JOIN production.products AS pp on pp.product_id= ord.product_id
+  INNER JOIN sales.orders as cur_order on cur_order.order_id= ord.order_id
+  WHERE pp.list_price < 200
+  AND DATEPART(week, cur_order.order_date) <= 5 -- all products orderd the 5 first weeks
+  AND YEAR(cur_order.order_date)= 2018 -- in 2018
+
+-- order_id	item_id	product_id	quantity	list_price	product_name	order_date
+--1326	2	269	2	199.99	Trek Precaliber 12 Boy's - 2018	2018-01-01
+--1334	3	84	2	109.99	Sun Bicycles Lil Kitt'n - 2017	2018-01-07
+--1346	5	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-01-14
+--1352	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-16
+--1353	4	86	2	149.99	Trek Girl's Kickster - 2017	2018-01-17
+--1379	3	263	2	89.99	Strider Classic 12 Balance Bike - 2018	2018-02-02
+
+SELECT 
+CONCAT('last name: ',[last_name], ' ; city:' ,[city])
+FROM [BikeStores].[sales].[customers]
+
+--last name: Burks ; city:Orchard Park
+--last name: Todd ; city:Campbell
+--last name: Fisher ; city:Redondo Beach
+--last name: Spence ; city:Uniondale
+
+SELECT 
+      [first_name]
+      ,[last_name]
+  FROM [BikeStores].[sales].[customers]
+  WHERE first_name like '[A-B]%'
+--first_name	last_name
+--Aleta	Shepard
+--Adelle	Larsen
+--Araceli	Golden
+--Brittney	Woodward
+
+
+SELECT 
+      first_name,
+	  SUBSTRING(first_name, 0,3) as n
+  FROM [BikeStores].[sales].[customers]
+--first_name	n
+--Debra	De
+--Kasha	Ka
+--Tameka Ta
+
+
+SELECT 
+      first_name
+	  ,last_name
+	  ,LEN(first_name) as num
+	  ,SUBSTRING(first_name, 0,4) as short_name
+	  ,CONCAT(first_name, ' ', last_name) as full_name
+  FROM [BikeStores].[sales].[customers]
+
+--first_name	last_name	num	short_name	full_name
+--Debra	Burks	5	Deb	Debra Burks
+--Kasha	Todd	5	Kas	Kasha Todd
+--Tameka	Fisher	6	Tam	Tameka Fisher
+--Daryl	Spence	5	Dar	Daryl Spence
+
+
+
+
 
 
 
