@@ -251,6 +251,110 @@ WHERE state like N'C%'
 
 -- Lesson 3
 -- Working with Date and Time Data
+-- Data type, Storage bytes, Date Range (Gregorian Calender), Accuracy, Recommended Entry Format
+-- datetime, 8, jan 1 1753 to dec 31 9999, round .000,003 or .007, YYYYMMDD hh:mm:ss[.mmm]
+-- smalldatetime, 4,jan 1 1900 to june 6 2079, 1 min, YYYYMMDD hh:mm:ss[.mmm]
+-- datetime2, 6-8,jan 1 0001 to dec 31 9999, 100 nanoseconds, YYYYMMDD hh:mm:ss[.nnnnnnn]
+-- date, 3,jan 1 0001 to dec 31 9999, 1 day, YYYY-MM-DD
+-- time, 3-5, na time only, 100 nanoseconds, hh:mm:ss[.nnnnnnn]
+-- datetimeoffset,8-10, 6-8,jan 1 0001 to dec 31 9999, 100 nanoseconds, YYYY-MM-DDThh:mm:ss[.nnnnnnn][+|-][hh:mm], offset = timezone
+
+-- Store date and time together, use datetime2 due to more accuracy
+
+
+-- Entering Date and Time Data Types Using Strings
+
+-- Best practice
+-- Use character strings to express date and time values
+-- Use language-neutral formats
+-- ISO format, it is universal
+-- Not use localtion or cultural format
+
+SELECT [order_id]
+      ,[customer_id]
+      ,[order_status]
+      ,[order_date]
+      ,[required_date]
+      ,[shipped_date]
+      ,[store_id]
+      ,[staff_id]
+  FROM [BikeStores].[sales].[orders]
+  WHERE  order_date > '20161231'-- 4 year, 2 month, 2 day, universal like this, standard string
+-- ca use time here also
+
+SELECT GETDATE()
+-- 2020-06-29 20:12:55.280
+
+-- Working Separately with Date and Time
+-- If only date is specified
+DECLARE @DateOnly AS datetime2 = '20201212';-- this will be time 00:00:00, since no time is given
+SELECT @DateOnly as RESULT;
+-- 2020-12-12 00:00:00.0000000
+
+-- If only time is specified
+DECLARE @time AS time = '12:34:15';-- this will be time JAN 01 1900, since no date is given
+SELECT CAST(@time as datetime2) as RESULT;
+-- 1900-01-01 12:34:15.0000000
+
+-- Querying Date and Time Values
+-- A bit more warning, be careful
+
+SELECT [order_status]
+      ,[order_date]
+      ,[required_date]
+      ,[shipped_date]
+      ,[store_id]
+      ,[staff_id]
+  FROM [BikeStores].[sales].[orders]
+  WHERE order_date = '20070825' -- This will time 00:00:00
+--When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
+
+-- Date and Time Functions
+SELECT 
+	GETDATE() AS gt, -- 2020-06-29 20:27:10.180
+	CURRENT_TIMESTAMP as ct, -- 2020-06-29 20:27:10.180
+	GETUTCDATE() as gud, -- 2020-06-29 18:27:10.180
+	SYSDATETIME() as sdt, -- 2020-06-29 20:27:10.1808310
+	SYSUTCDATETIME() as sudt, -- 2020-06-29 18:27:10.1808310
+	SYSDATETIMEOFFSET() as sudto -- 2020-06-29 20:27:10.1808310 +02:00
+
+
+SELECT DATENAME(weekday, '20200629') as _day; -- Monday
+SELECT DATENAME(MONTH, '20200629') as _month; -- June
+SELECT DATEPART(MONTH, '20200629') as _month_num; -- 6
+SELECT DATEPART(WEEK, '20200629') as _week_num; -- 27
+SELECT DATEPART(QUARTER, '20200629') as _quarter; -- 2
+SELECT DATETIMEFROMPARTS(2020,6, 28, 8, 31,0,0) as _build_date; -- 2020-06-28 08:31:00.000
+
+
+SELECT DATEDIFF(MILLISECOND, GETDATE(), SYSDATETIME()); -- 1
+SELECT DATEDIFF(MILLISECOND, GETDATE(), GETUTCDATE());  -- -7200000
+
+-- Used mot DATEDIFF and DATEADD
+SELECT DATEADD(DAY, 10, '20200629');  -- 2020-07-09 00:00:00.000
+SELECT DATEADD(MINUTE, 10, GETDATE()); -- 2020-06-29 20:51:11.173
+
+SELECT ISDATE('20200629'); -- is valid -- 1
+SELECT ISDATE('20200632'); -- is not valid  -- 0
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 
 
 
