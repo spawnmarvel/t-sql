@@ -35,7 +35,7 @@ SELECT CAST(1234 AS BINARY(4)) as result
 -- xml, The advantage of the xml data type over storing XML in a character data type is that the xml data type allows XML nodes and attributes to be queried within a T-SQL query using XQuery expressions
 -- uniqueidentifier, GUID, be generated within SQL Server by using the NEWID() 
 SELECT NEWID() as guid_from_new_id
-1DD193F3-F303-4FFB-9616-34344E555E96
+--1DD193F3-F303-4FFB-9616-34344E555E96
 
 -- hierarchyid
 -- rowversion
