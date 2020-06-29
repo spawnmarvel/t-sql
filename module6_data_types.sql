@@ -68,12 +68,12 @@ SELECT @my_tiny_int + @my_int;
 -- Implicit conversion
 -- When comparing data of one data type to another
 -- Transparent to the user
-WHERE <column of smallint type> = <value of int type>
+-- WHERE <column of smallint type> = <value of int type>
 
 -- Explicit conversion
 -- Use CAST or CONVERT functions
 
-CAST(unitprice AS INT)
+-- CAST(unitprice AS INT)
 --
 -- Implicit conversion integer data types
 DECLARE @my_tiny_int AS TINYINT =25
@@ -116,12 +116,12 @@ Completion time: 2020-06-28T20:14:46.6610969+02:00
 -- nvarchar, no, yes, no, yes
 
 --Varchar and nvarchar data types support the storeage of very long strings, with max
-CHAR(n)--1-8000 characters, storage n bytes, padded
-NCHAR(n)--1-4000 characters, storage 2*n bytes, padded
-VARCHAR(n)--1-8000 characters, storage actual length + 2 bytes
-NVARCHAR(n)--1-4000 characters, storage actual length + 2 bytes
-VARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
-NVARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+-- CHAR(n)--1-8000 characters, storage n bytes, padded
+-- NCHAR(n)--1-4000 characters, storage 2*n bytes, padded
+-- VARCHAR(n)--1-8000 characters, storage actual length + 2 bytes
+-- NVARCHAR(n)--1-4000 characters, storage actual length + 2 bytes
+-- VARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+-- NVARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
 
 -- Single-byte character, marked 'SQL server'
 -- Multi-byte character, marked prefix N, N'SQL Server'
