@@ -78,25 +78,25 @@ SELECT @my_tiny_int + @my_int;
 -- Implicit conversion integer data types
 DECLARE @my_tiny_int AS TINYINT =25
 DECLARE @my_int AS INT = 9999;
-SELECT @my_tiny_int + @my_int;
+SELECT @my_tiny_int + @my_int
 -- Result
-10024
+--10024
 -- Implicit conversion integer and char
 DECLARE @my_char AS char(5)='6';
 DECLARE @my_int2 AS int = 1;
-SELECT @my_char + @my_int2;
+SELECT @my_char + @my_int2
 -- Result
-7
+--7
 -- SQL Server will automatically attempt to perform an implicit conversion from a lower-precedence data type to a higher-precedence data type. 
 -- Failing
 DECLARE @my_char AS char(5) = 'six';
 DECLARE @my_int AS INT = 1;
 SELECT @my_char + @my_int;
 
-Msg 245, Level 16, State 1, Line 4
-Conversion failed when converting the varchar value 'six  ' to data type int.
+--Msg 245, Level 16, State 1, Line 4
+--Conversion failed when converting the varchar value 'six  ' to data type int.
 
-Completion time: 2020-06-28T20:14:46.6610969+02:00
+--Completion time: 2020-06-28T20:14:46.6610969+02:00
 
 -- Lesson 2 Character Data Types
 -- SQL Server support two kinds of character data as fixed-width of variable-width data
