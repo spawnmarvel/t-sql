@@ -308,3 +308,10 @@ SELECT [order_status]
 -- When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
 
 -- Date and Time Functions
+
+SELECT GETDATE() AS gt; -- 2020-06-29 20:27:10.180
+-- SELECT CURRENT_TIMESTAMP as ct; -- 2020-06-29 20:27:10.180
+-- SELECT GETUTCDATE() as gud; -- 2020-06-29 18:27:10.180
+-- SELECT SYSDATETIME() as sdt; -- 2020-06-29 20:27:10.1808310
+-- SELECT SYSUTCDATETIME() as sudt; -- 2020-06-29 18:27:10.1808310
+-- SELECT SYSDATETIMEOFFSET() as sudto; -- 2020-06-29 20:27:10.1808310 +02:00
