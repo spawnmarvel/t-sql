@@ -182,3 +182,84 @@ WHERE first_name like '[FIB]%';
 -- 10	Bernardine; Houston
 
 -- Examples:
+-- Default collation is case insensitive
+SELECT  customer_id,first_name, last_name
+FROM [BikeStores].[sales].[customers]
+WHERE last_name   = 'Burks' -- = 'burks' works either way
+
+SELECT  customer_id,first_name, last_name
+FROM [BikeStores].[sales].[customers]
+WHERE last_name COLLATE Latin1_GENERAL_CS_AS  = 'Burks'--works, but = 'burks' does not work
+
+-- CONCAT and +
+SELECT  customer_id, first_name + ' ' + last_name as name_
+FROM [BikeStores].[sales].[customers]
+
+SELECT  customer_id, CONCAT(first_name, ' ', last_name)as name_
+FROM [BikeStores].[sales].[customers]
+
+-- FORMAT—allows you to format an input value to a character string based on a .NET format string, with an optional culture parameter. 
+DECLARE @m money = 120.595
+SELECT @m AS unformatted_value,
+FORMAT(@m, 'C', 'zh-cn') AS zh_cn_currency,
+FORMAT(@m, 'C', 'en-us') AS en_us_currency,
+FORMAT(@m, 'C', 'de-de') AS de_de_currency;
+-- unformatted_value	zh_cn_currency	en_us_currency	de_de_currency
+-- 120.595	¥120.60	$120.60	120,60 €
+
+-- SUBSTRING
+SELECT SUBSTRING('This is not a company',14, 8) as result;
+-- company
+
+-- LEN, rm whitespace
+SELECT LEN('This is not a company     ') as result;
+-- 21
+--DATALENGTH, num of bytes
+SELECT DATALENGTH('This is not a company     ') as result;
+-- 26
+
+-- CHARINDEX
+SELECT CHARINDEX('not','This is not a company') as result;
+-- 9
+
+-- REPLACE
+SELECT REPLACE('This is not a company', 'not', 'good') as result;
+-- This is good a company
+
+SELECT UPPER('This is not a company') as result;
+-- THIS IS NOT A COMPANY
+SELECT LOWER('This is not a company') as result;
+
+SELECT LEFT('Microsoft SQL Server',9) AS left_example,
+RIGHT('Microsoft SQL Server',6) AS right_example;
+-- left_example	right_example
+-- Microsoft	Server
+
+SELECT first_name
+FROM sales.customers
+WHERE state like 'C%'
+
+SELECT first_name
+FROM sales.customers
+WHERE state like N'C%'
+
+
+-- The "N" prefix stands for National Language in the SQL-92 standard, and is used for representing 
+-- unicode characters. Any time you pass Unicode data to SQL Server you must prefix the 
+-- Unicode string with N . It is used when the type is from NVARCHAR , NCHAR or NTEXT
+
+-- Lesson 3
+-- Working with Date and Time Data
+-- Data type, Storage bytes, Date Range (Gregorian Calender), Accuracy, Recommended Entry Format
+-- datetime, 8, jan 1 1753 to dec 31 9999, round .000,003 or .007, YYYYMMDD hh:mm:ss[.mmm]
+-- smalldatetime, 4,jan 1 1900 to june 6 2079, 1 min, YYYYMMDD hh:mm:ss[.mmm]
+-- datetime2, 6-8,jan 1 0001 to dec 31 9999, 100 nanoseconds, YYYYMMDD hh:mm:ss[.nnnnnnn]
+-- date, 3,jan 1 0001 to dec 31 9999, 1 day, YYYY-MM-DD
+-- time, 3-5, na time only, 100 nanoseconds, hh:mm:ss[.nnnnnnn]
+-- datetimeoffset,8-10, 6-8,jan 1 0001 to dec 31 9999, 100 nanoseconds, YYYY-MM-DDThh:mm:ss[.nnnnnnn][+|-][hh:mm], offset = timezone
+
+-- Store date and time together, use datetime2 due to more accuracy
+
+
+-- Entering Date and Time Data Types Using Strings
+
