@@ -1,0 +1,1 @@
+-- SQL Server Built-in Function Types

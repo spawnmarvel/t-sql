@@ -264,5 +264,23 @@ USE BikeStores
 INSERT INTO production.categories (category_name) values ('Road bike')
 
 
--- Sequence object in SQL Server 2012 and later, doed the same thing just auto number
+-- Sequence object in SQL Server 2012 and later, doed the same thing just auto number, It provides more flexibility than IDENTITY.
 
+-- Test increment
+
+
+CREATE TABLE inc(
+i_id INT IDENTITY (1,5)
+);
+
+ALTER TABLE INC ADD info VARCHAR(10);
+
+
+INSERT INTO inc(info) values
+	('tets1'),
+	('tets2')
+
+SELECT * FROM inc;
+
+-- 1	tets1
+-- 6	tets2
