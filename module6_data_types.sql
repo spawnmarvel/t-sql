@@ -97,3 +97,88 @@ SELECT @my_char + @my_int;
 -- Conversion failed when converting the varchar value 'six  ' to data type int.
 
 -- Completion time: 2020-06-28T20:14:46.6610969+02:00
+
+-- Lesson 2 Character Data Types
+-- SQL Server support two kinds of character data as fixed-width of variable-width data
+-- ASCI, 1 byte pr character system
+-- UNICODE, 2 bute pr character system
+-- Single byte:
+-- Char, varchar
+-- one byte stored per character. only 256 possible characters, limits langauage support
+
+-- Multi byte:
+-- nchar, nvarchare
+-- Multiple bytes stored per characters (usullay 2 bytes , but sometimes 4)
+-- data type, fixed width, variable with, single byte charactes, multi byte characters
+-- char,yes,no,yes,no
+-- nchhar, yes, no, no, yes
+-- varchar, no, yes, yes, no
+-- nvarchar, no, yes, no, yes
+
+-- Varchar and nvarchar data types support the storeage of very long strings, with max
+-- CHAR(n)--1-8000 characters, storage n bytes, padded
+-- NCHAR(n)--1-4000 characters, storage 2*n bytes, padded
+-- VARCHAR(n)--1-8000 characters, storage actual length + 2 bytes
+-- NVARCHAR(n)--1-4000 characters, storage actual length + 2 bytes
+-- VARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+-- NVARCHAR(max) -- up to 2 GB, storage actual length + 2 bytes
+
+-- Single-byte character, marked 'SQL server'
+-- Multi-byte character, marked prefix N, N'SQL Server'
+
+-- Collation
+-- Is a collection of properties for character data
+-- Character set, sort order, case sensitivity, accent sensitivity
+-- When quering, collation is important for comparison
+-- Is the database case-sensitive?
+
+USE BikeStores
+SELECT staff_id, last_name
+FROM sales.staffs
+WHERE last_name COLLATE Latin1_General_CS_AS = 'David';
+-- ADD COLLATE caluse to control collation comparison
+
+
+-- This has been set, and in most cases we do not care about this.
+
+
+-- String Concatenation
+USE BikeStores
+SELECT staff_id, CONCAT(first_name,' , ' + last_name) as full_name
+FROM sales.staffs
+WHERE staff_id <3
+-- staff_id	full_name
+-- 1	Fabiola , Jackson
+-- 2	Mireya , Copeland
+-- if first name or last was null, CONCAT converts NULL to empty string, better then use +
+
+-- The LIKE Predicate
+-- % (Percent), LIKE N'Sand%'
+-- _ (Underscore), LIKE N'_a%'
+-- [<List of characters>], LIKE N'[DEF]%', 
+-- [<Character> - <character>], LIKE N'[DEF]%' 
+-- ESCAPE
+
+-- return all f
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like 'F%';
+-- staff_id	full_name
+-- 1	Fabiola; Jackson
+
+-- return second char is i
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like '_I%';
+-- staff_id	full_name
+-- 2	Mireya; Copeland
+-- 4	Virgie; Wiggins
+-- retunr any strings that starts with f, i or b
+SELECT staff_id,CONCAT(first_name, '; ' + last_name) as full_name
+FROM [BikeStores].[sales].[staffs]
+WHERE first_name like '[FIB]%';
+-- staff_id	full_name
+-- 1	Fabiola; Jackson
+-- 10	Bernardine; Houston
+
+-- Examples:
