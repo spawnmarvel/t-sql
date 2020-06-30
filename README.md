@@ -49,9 +49,9 @@ CREATE TABLE [factory].[cars] -- is stored in factory
 ##### A SQL schema is a useful database concept. It helps us to create a logical grouping of objects such as tables, stored procedures, and functions. 
 
 ##### IDENTITY
-#### IDENTITY [ (seed , increment) ]  
-#### seed, Is the value that is used for the very first row loaded into the table.
-#### increment, Is the incremental value that is added to the identity value of the previous row that was loaded.
+##### IDENTITY [ (seed , increment) ]  
+##### seed, Is the value that is used for the very first row loaded into the table.
+##### increment, Is the incremental value that is added to the identity value of the previous row that was loaded.
 ##### Create (first tables):
 ``` sql
 -- create schemas
