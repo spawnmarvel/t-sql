@@ -308,3 +308,4 @@ SELECT [order_status]
 -- When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
 
 -- Date and Time Functions
+SELECT GETDATE() AS gt; -- 2020-06-29 20:27:10.180
