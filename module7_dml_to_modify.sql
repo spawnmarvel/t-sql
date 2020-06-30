@@ -251,3 +251,18 @@ SELECT TOP (1000) [product_id]
 -- 2	bmw	23	black
 -- 3	fiat	24	blue
 -- 4	toyota	25	brown
+
+-- 
+-- Lesson 3: Generating Automatic Column Values
+-- IDENTITY property, for all versions of SQL Server.
+CREATE TABLE production.categories (
+	category_id INT IDENTITY (1, 1) PRIMARY KEY,
+	category_name VARCHAR (255) NOT NULL
+);
+
+USE BikeStores
+INSERT INTO production.categories (category_name) values ('Road bike')
+
+
+-- Sequence object in SQL Server 2012 and later, doed the same thing just auto number
+
