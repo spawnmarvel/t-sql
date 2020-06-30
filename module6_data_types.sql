@@ -320,3 +320,41 @@ SELECT DATEPART(QUARTER, '20200629') as _quarter; -- 2
 SELECT DATETIMEFROMPARTS(2020,6, 28, 8, 31,0,0) as _build_date; -- 2020-06-28 08:31:00.000
 
 SELECT DATEDIFF(MILLISECOND, GETDATE(), GETUTCDATE());  -- -7200000
+
+-- Used mot DATEDIFF and DATEADD
+SELECT DATEADD(DAY, 10, '20200629');  -- 2020-07-09 00:00:00.000
+SELECT DATEADD(MINUTE, 10, GETDATE()); -- 2020-06-29 20:51:11.173
+
+SELECT ISDATE('20200629'); -- is valid -- 1
+SELECT ISDATE('20200632'); -- is not valid  -- 0
+
+
+-- Lab: Working with SQL Server 2016 Data Types
+
+SELECT CAST('2081228' AS DATE) AS casted;
+
+SELECT CONVERT(DATE, '12/28/2018', 101) AS converted;
+
+
+
+
+DROP TABLE IF EXISTS learn.sqldates;
+
+CREATE TABLE learn.sqldates(
+checkdate varchar(9)
+);
+
+INSERT INTO learn.sqldates (checkdate)
+values ('20190101'), ('20190202Y') -- + 2020
+
+SELECT checkdate,
+CASE WHEN ISDATE(checkdate) = 1 
+THEN CONVERT(DATE, checkdate) 
+ELSE NULL 
+END AS converteddate
+FROM learn.sqldates
+-- checkdate	converteddate
+-- 20200101	2020-01-01
+-- 20200202Y	NULL
+-- 20190101	2019-01-01
+-- 20190202Y	NULL
