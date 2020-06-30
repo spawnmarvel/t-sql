@@ -262,4 +262,49 @@ WHERE state like N'C%'
 
 
 -- Entering Date and Time Data Types Using Strings
+-- Best practice
+-- Use character strings to express date and time values
+-- Use language-neutral formats
+-- ISO format, it is universal
+-- Not use localtion or cultural format
 
+SELECT [order_id]
+      ,[customer_id]
+      ,[order_status]
+      ,[order_date]
+      ,[required_date]
+      ,[shipped_date]
+      ,[store_id]
+      ,[staff_id]
+  FROM [BikeStores].[sales].[orders]
+  WHERE  order_date > '20161231'-- 4 year, 2 month, 2 day, universal like this, standard string
+-- ca use time here also
+
+SELECT GETDATE()
+-- 2020-06-29 20:12:55.280
+
+-- Working Separately with Date and Time
+-- If only date is specified
+DECLARE @DateOnly AS datetime2 = '20201212';-- this will be time 00:00:00, since no time is given
+SELECT @DateOnly as RESULT;
+-- 2020-12-12 00:00:00.0000000
+
+-- If only time is specified
+DECLARE @time AS time = '12:34:15';-- this will be time JAN 01 1900, since no date is given
+SELECT CAST(@time as datetime2) as RESULT;
+-- 1900-01-01 12:34:15.0000000
+
+-- Querying Date and Time Values
+-- A bit more warning, be careful
+
+SELECT [order_status]
+      ,[order_date]
+      ,[required_date]
+      ,[shipped_date]
+      ,[store_id]
+      ,[staff_id]
+  FROM [BikeStores].[sales].[orders]
+  WHERE order_date = '20070825' -- This will time 00:00:00
+-- When querying date and time data types, you might need to consider both the date and time portions of the data to return the results you expect. 
+
+-- Date and Time Functions
