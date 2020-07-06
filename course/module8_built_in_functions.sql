@@ -68,6 +68,54 @@ SELECT CONVERT(char(20), CURRENT_TIMESTAMP)
 SELECT PARSE('02/10/2020' AS datetime2 USING 'en-US') as us_result; -- 2020-02-10 00:00:00.0000000
 SELECT PARSE('02/10/2020' AS datetime2 USING 'no') as no_result; -- 2020-10-02 00:00:00.0000000
 
+-- Converting with TRY_PARSE and TRY_CONVERT
+-- Problem with CAST, CONVERT, not always work
+-- TRY_PARSE, TRY_CONVERT returns NULL if they fail, that is good!
+SELECT TRY_PARSE('WILL FAIL' AS datetime2 USING 'en-US') as us_result; -- NULL
+
+-- Writing Logical Test with Functions
+SELECT ISNUMERIC('12') AS isnumeric_result; --if a string can be a valid numeric, returns 1 for valid
+SELECT ISNUMERIC('qa') AS isnumeric_result; --if a string can be a valid numeric, returns 0 for not valid
+
+-- Performing Conditional Tests with IIF
+-- Looked a CAST earlier, IIF as a shorthand approach to writing a CASE statement with two possible return values
+-- expression, value if true, value if unknown
+
+SELECT p.ProductID, p.Name, p.ListPrice,
+CASE WHEN p.ListPrice < 150 THEN 'CHEAP'
+ELSE 'EXPENSIVE'
+END price_test
+      
+FROM [AdventureWorks2016].[Production].[Product] p
+WHERE p.ListPrice >80
+
+-- IIF, to simplify lofic, IIF must be nested if many.
+SELECT p.ProductID, p.Name, p.ListPrice,
+IIF(p.ListPrice < 150,'CHEAP', 'EXPENSIVE')
+FROM [AdventureWorks2016].[Production].[Product] p
+WHERE p.ListPrice >80
+
+SELECT  p.ProductID, p.Name, p.ListPrice,
+CASE  
+	WHEN p.ListPrice > 600 THEN 'Premimum'
+	ELSE 'Budget'
+END price_category,
+IIF(p.ListPrice > 1000, 'Premimum2', 'Budget2') AS price_category_2
+      
+FROM [AdventureWorks2016].[Production].[Product] p
+WHERE p.ListPrice >80
+AND p.Color = 'RED'
+
+
+-- CHOOSE, Selecting Items from a List with CHOOSE
+-- Not sure where to use it, better to use join
+-- Maybe if calculated columns
+
+
+
+
+
+
 
 
 
