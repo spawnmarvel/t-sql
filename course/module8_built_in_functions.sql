@@ -50,11 +50,25 @@ GROUP BY ProductID
 
 SELECT '2'+ 2 -- 4
 SELECT 'A'+ 2 -- Conversion failed when converting the varchar value 'A' to data type int.
---FIX
+-- FIX
 SELECT 'A' + CAST(2 AS varchar)
 
---cast
+-- cast
 SELECT CAST(28 AS varchar)
 SELECT CAST(3.284 AS int)
 SELECT CAST(1 AS binary)
+-- covnvert has a differnt order, with cast it is value as datatype
+-- convert has also style, for dates, xml and so on, not do to much of this
+SELECT CONVERT(char(20), CURRENT_TIMESTAMP)
+
+-- Converting Strings with PARSE
+-- can be extremely useful, cultural data, dates
+-- Use cultural neutral, but if not, US date vs ENG date
+-- Parse can specify cultural
+SELECT PARSE('02/10/2020' AS datetime2 USING 'en-US') as us_result; -- 2020-02-10 00:00:00.0000000
+SELECT PARSE('02/10/2020' AS datetime2 USING 'no') as no_result; -- 2020-10-02 00:00:00.0000000
+
+
+
+
 

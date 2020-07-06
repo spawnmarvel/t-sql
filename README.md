@@ -7,6 +7,8 @@ Querying Data with Transact-SQL
 
 [Markdown Github] https://guides.github.com/features/mastering-markdown/
 
+[Supported Culture Codes] https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes
+
 ### Tips
 * Show line numbers. Tools-> Options->Text Editor->Transact-SQL->General
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
