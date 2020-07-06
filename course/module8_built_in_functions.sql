@@ -43,3 +43,10 @@ FROM Production.Product
 WHERE ListPrice > 0
 GROUP BY ProductID
 
+-- Lesson 2
+-- Implicit and Explicit Data Type Conversions
+-- Data types must be converted during SQL Server operations.
+-- May implicitily convert data types
+
+SELECT '2'+ 2 -- 4
+SELECT 'A'+ 2 -- Conversion failed when converting the varchar value 'A' to data type int.
