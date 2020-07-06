@@ -47,6 +47,20 @@ CREATE TABLE [factory].[cars] -- is stored in factory
 (ID   INT IDENTITY(1, 1), 
  Name VARCHAR(20)
 );
+
+-- NEWID() and UNIQUEIDENTIFIER
+CREATE TABLE books2( --is stored in dbo
+ B_ID INT IDENTITY(1,1) PRIMARY KEY,
+ B_GUID UNIQUEIDENTIFIER NOT NULL  DEFAULT NEWID(),
+ B_Name VARCHAR(20)
+);
+go
+
+INSERT INTO books2 (B_Name) VALUES
+('Moby Dick'),
+('1000 days')
+
+SELECT * FROM books2
 ````
 ##### A SQL schema is a useful database concept. It helps us to create a logical grouping of objects such as tables, stored procedures, and functions. 
 

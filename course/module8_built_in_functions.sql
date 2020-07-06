@@ -110,7 +110,23 @@ AND p.Color = 'RED'
 -- Not sure where to use it, better to use join
 -- Maybe if calculated columns
 
+-- Lesson 4
+-- Using Functions to Work with NULL
+-- ISNULL is not standard; use COALESCE instead. COALESCE 
+-- IS NULL
 
+-- Using COALESCE to Return Non-NULL Values
+-- Returns the first non-null value in a list
+-- With only two arguments, COALESCE behaves like ISNULL
+-- if all arguments are NULL, COALESCE returns NULL
+
+SELECT [CustomerID]
+	  ,COALESCE([PersonID], '0')
+      ,[rowguid]
+      ,[ModifiedDate]
+  FROM [AdventureWorks2016].[Sales].[Customer]
+
+  
 
 
 
