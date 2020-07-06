@@ -121,12 +121,34 @@ AND p.Color = 'RED'
 -- if all arguments are NULL, COALESCE returns NULL
 
 SELECT [CustomerID]
-	  ,COALESCE([PersonID], '0')
+	  ,COALESCE([PersonID], '0') -- replaces NULL with 0
       ,[rowguid]
       ,[ModifiedDate]
   FROM [AdventureWorks2016].[Sales].[Customer]
 
-  
+-- Last function
+-- Using NULLIF to Return NULL If Values Match
+-- Takes a value and converts it to NULL
+-- Use case, aggregation, if table and columns that do not have a actual value
+-- production list price, should never be zero, but if not know list price, then 0 value
+-- NULLIF Takes two arguments, returns NULL of they both match, if they are not equal return first argument
+-- gives value when using agggregation
+
+SELECT [ProductID]
+      ,[Name]
+      ,[Color]
+      ,[ListPrice]
+      ,NULLIF([ListPrice], '0') AS NULL_COLUMN
+  FROM [AdventureWorks2016].[Production].[Product]
+  ORDER BY ListPrice desc
+
+-- ProductID	Name	Color	ListPrice	NULL_COLUMN
+-- 922	Road Tire Tube	NULL	3.99	3.99
+-- 873	Patch Kit/8 Patches	NULL	2.29	2.29
+-- 523	LL Spindle/Axle	NULL	0.00	NULL
+-- 524	HL Spindle/Axle	NULL	0.00	NULL
+
+
 
 
 

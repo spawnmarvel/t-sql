@@ -49,6 +49,8 @@ CREATE TABLE [factory].[cars] -- is stored in factory
 );
 
 -- NEWID() and UNIQUEIDENTIFIER
+USE test
+GO
 CREATE TABLE books2( --is stored in dbo
  B_ID INT IDENTITY(1,1) PRIMARY KEY,
  B_GUID UNIQUEIDENTIFIER NOT NULL  DEFAULT NEWID(),
