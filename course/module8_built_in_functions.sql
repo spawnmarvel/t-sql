@@ -31,5 +31,15 @@ GO
 -- scalar, calculate on each row
 SELECT ABS(-1.0), ABS(0.98);
 SELECT DB_NAME() as db;
+SELECT sd.SalesOrderID,sd.OrderDate, YEAR(sd.OrderDate) order_year
+FROM Sales.SalesOrderHeader sd;
+-- aggregate, calculate on a set of rows
+SELECT COUNT(*) AS num_of_orders
+FROM Sales.SalesOrderHeader sd
+WHERE ShipDate > '20130131' AND ShipDate < '20131231';
 
+SELECT TOP(5) ProductID, SUM(ListPrice) as total_price
+FROM Production.Product
+WHERE ListPrice > 0
+GROUP BY ProductID
 
