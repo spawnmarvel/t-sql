@@ -101,7 +101,6 @@ CASE
 	ELSE 'Budget'
 END price_category,
 IIF(p.ListPrice > 1000, 'Premimum2', 'Budget2') AS price_category_2
-      
 FROM [AdventureWorks2016].[Production].[Product] p
 WHERE p.ListPrice >80
 AND p.Color = 'RED'
