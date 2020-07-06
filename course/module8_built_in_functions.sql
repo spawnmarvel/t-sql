@@ -50,3 +50,11 @@ GROUP BY ProductID
 
 SELECT '2'+ 2 -- 4
 SELECT 'A'+ 2 -- Conversion failed when converting the varchar value 'A' to data type int.
+--FIX
+SELECT 'A' + CAST(2 AS varchar)
+
+--cast
+SELECT CAST(28 AS varchar)
+SELECT CAST(3.284 AS int)
+SELECT CAST(1 AS binary)
+
