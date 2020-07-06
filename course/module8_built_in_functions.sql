@@ -30,6 +30,6 @@ GO
 
 -- scalar, calculate on each row
 SELECT ABS(-1.0), ABS(0.98);
--- SELECT CAST(SYSDATETIME() AS DATE) AS d;
+SELECT DB_NAME() as db;
 
 
