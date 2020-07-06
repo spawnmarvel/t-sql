@@ -148,9 +148,69 @@ SELECT [ProductID]
 -- 523	LL Spindle/Axle	NULL	0.00	NULL
 -- 524	HL Spindle/Axle	NULL	0.00	NULL
 
+-- Demonstration: Using Functions to Work with NULL
+SELECT
+      p.Name
+      ,p.Size + ' ' + p.SizeUnitMeasureCode as Size,
+      CAST(p.Weight as varchar) + ' ' + 
+      p.WeightUnitMeasureCode as Weight
+  FROM [AdventureWorks2016].[Production].[Product]
+
+-- Name	Size	Weight
+-- Adjustable Race	NULL	NULL
+-- Bearing Ball	NULL	NULL
+-- BB Ball Bearing	NULL	NULL
+
+SELECT
+      p.Name
+      ,ISNULL(p.Size + ' ' + p.SizeUnitMeasureCode, 'NA') as Size,
+      COALESCE(CAST(p.Weight as varchar) + ' ' + 
+	  p.WeightUnitMeasureCode, 'NA') as Weight
+  FROM [AdventureWorks2016].[Production].[Product] p
+
+-- Name	Size	Weight
+-- Cone-Shaped Race	NA	NA
+-- Reflector	NA	NA
+-- LL Mountain Rim	NA	435.00 G  
+-- ML Mountain Rim	NA	450.00 G  
 
 
+SELECT
+      p.Name,
+	  p.weight,
+      COALESCE(CAST(p.Weight as varchar) + ' ' + 
+	  p.WeightUnitMeasureCode, 'NA') as Weight
+  FROM [AdventureWorks2016].[Production].[Product] p
 
+-- Name	weight	Weight
+-- Cone-Shaped Race	NULL	NA
+-- Reflector	NULL	NA
+-- LL Mountain Rim	435.00	435.00 G  
+-- ML Mountain Rim	450.00	450.00 G  
+-- HL Mountain Rim	400.00	400.00 G  
+
+
+SELECT 
+	p.FirstName +' ' + p.MiddleName + ' '+  p.LastName as full_name
+  FROM [AdventureWorks2016].[Person].[Person] p
+
+  -- Syed E Abbas
+-- Catherine R. Abel
+-- NULL
+-- NULL
+-- Kim B Abercrombie
+
+SELECT 
+	CONCAT(p.FirstName,' ' + p.MiddleName + ' '+  p.LastName) as full_name --REMOVES NULL
+  FROM [AdventureWorks2016].[Person].[Person] p
+
+-- Syed E Abbas
+-- Catherine R. Abel
+-- Kim
+-- Kim
+-- Kim B Abercrombie
+
+-- Lab: Using Built-in Functions
 
 
 
