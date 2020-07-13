@@ -32,3 +32,18 @@ ORDER BY TOTAL_SALES DESC
 SELECT COUNT(s.salesPersonID), COUNT(DISTINCT(s.CustomerID)) AS UNIQUE_CUSTOMERS
 FROM Sales.SalesOrderHeader AS s
 WHERE s.SalesPersonID = 279 and YEAR(s.OrderDate)= 2005;
+
+-- Using Aggregate Functions with NULL
+-- Most aggregate functions ignore null
+-- COUNT(column) ignores null
+-- COUNT(*) count all rows
+-- NULL may produce incorrect results, such as use of AVG
+-- Use ISNULL or COALESCE to replace NULLS before aggregating
+
+SELECT *
+FROM dbo.t1
+-- c1	c2
+-- 1	NULL
+-- 2	10
+-- 3	30
+
