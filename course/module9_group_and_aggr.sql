@@ -94,3 +94,32 @@ FROM [AdventureWorks].[Sales].[SalesOrderHeader]
 WHERE YEAR(OrderDate)= 2005
 GROUP BY SalesPersonID
 
+-- This is done under the hood:
+-- the WHERE clause is processed followed by the GROUP BY. 
+-- WHERE YEAR(OrderDate)= 2005
+-- GROUP BY SalesPersonID
+
+-- GROUP BY AND AGGEGREATE FUNCTIONS ARE USED TOGETHER
+-- GRUOP BY CUSTOMER BUT WANT TO FIND AVG SALES PRICE.
+
+-- get all customers and the sum of bought
+SELECT c.CustomerID, SUM(s.UnitPrice) AS TOTAL_BOUGHT
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] c
+INNER JOIN AdventureWorks.Sales.SalesOrderDetail s ON s.SalesOrderID=c.SalesOrderID
+WHERE YEAR(OrderDate)= 2005
+GROUP BY c.CustomerID
+ORDER BY c.CustomerID
+-- CustomerID	TOTAL_BOUGHT
+-- 11000	3399.99
+-- 11001	3374.99
+-- 11002	3399.99
+
+--get customer 11000 and what he bought
+SELECT c.CustomerID, s.UnitPrice
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] c
+INNER JOIN AdventureWorks.Sales.SalesOrderDetail s ON s.SalesOrderID=c.SalesOrderID
+WHERE YEAR(OrderDate)= 2005
+AND c.CustomerID =11000
+
+-- CustomerID	UnitPrice
+-- 11000	3399.99
