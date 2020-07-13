@@ -123,3 +123,5 @@ AND c.CustomerID =11000
 
 -- CustomerID	UnitPrice
 -- 11000	3399.99
+
+-- Filtering Grouped Data Using the HAVING Clause
