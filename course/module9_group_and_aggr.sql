@@ -125,3 +125,38 @@ AND c.CustomerID =11000
 -- 11000	3399.99
 
 -- Filtering Grouped Data Using the HAVING Clause
+-- All the products that have AVG sale higher then?
+--get customer data where customer has more then 60 orders
+SELECT c.CustomerID, SUM(s.UnitPrice) AS TOTAL_BOUGHT, cu.PersonID, pp.Firstname, pp.LastName
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] c
+INNER JOIN AdventureWorks.Sales.SalesOrderDetail s ON s.SalesOrderID=c.SalesOrderID
+INNER JOIN AdventureWorks.Sales.Customer cu ON cu.CustomerID= c.CustomerID
+INNER JOIN AdventureWorks.Person.Person pp ON pp.BusinessEntityID = cu.PersonID
+WHERE YEAR(OrderDate)= 2005
+GROUP BY c.CustomerID, cu.PersonID, pp.Firstname, pp.LastName
+HAVING COUNT(*) > 60
+ORDER BY c.CustomerID
+
+-- Compare HAVING to WHERE
+-- WHERE clause controls which rows are available to the next phase of the query.
+-- HAVING clause controls which groups are available to the next phase of the query.
+
+-- DEMO
+-- having
+SELECT 
+s.CustomerID,-- customer
+SUM(s.TotalDue) as TOTAL_SALES -- sold to customer
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] s
+GROUP BY s.CustomerID
+HAVING SUM(s.TotalDue)> 900000 -- sum greather then
+ORDER BY TOTAL_SALES DESC
+
+-- where
+SELECT 
+s.CustomerID,-- customer
+SUM(s.TotalDue) as TOTAL_SALES -- sold to customer
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] s
+WHERE s.TotalDue < 500000-- where a sell is less then
+GROUP BY s.CustomerID 
+HAVING SUM(s.TotalDue)> 900000 -- sum greather then
+ORDER BY TOTAL_SALES DESC
