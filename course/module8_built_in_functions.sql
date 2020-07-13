@@ -213,6 +213,17 @@ SELECT
 -- Lab: Using Built-in Functions
 
 
+SELECT 'The unit price for ' + p.Name + ' is ' + CAST(p.ListPrice as varchar) AS PRODUCT_INFO
+FROM [AdventureWorks].[Production].[Product] p
+WHERE p.ListPrice > 0
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+--check what orders was sent fast, within 5 days and also print the purchase number and subsitute it, if it was missing
+SELECT o.SalesOrderID, o.OrderDate, o.ShipDate, o.ShipDate, COALESCE(o.PurchaseOrderNumber , 'Missing PO') as NO_PURCHASE_ORDER
+FROM [AdventureWorks].[Sales].[SalesOrderHeader] o
+WHERE o.OrderDate >= PARSE('4/1/2007' AS DATETIME USING 'en-us') --input must be parsed
+AND o.OrderDate <= PARSE('11/30/2007' AS DATETIME USING 'en-us') --input must be parsed
+AND o.ShipDate > DATEADD(DAY, 5, o.OrderDate)-- adds 5 days to the order date
 
 
 
