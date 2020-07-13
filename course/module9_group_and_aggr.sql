@@ -137,6 +137,11 @@ GROUP BY c.CustomerID, cu.PersonID, pp.Firstname, pp.LastName
 HAVING COUNT(*) > 60
 ORDER BY c.CustomerID
 
+--CustomerID	TOTAL_BOUGHT	PersonID	Firstname	LastName
+-- 29614	27084.2058	591	Ryan	Calafato
+-- 29703	29195.2354	789	Stefan	Delmarco
+-- 29966	27873.3926	1355	Richard	Lum
+
 -- Compare HAVING to WHERE
 -- WHERE clause controls which rows are available to the next phase of the query.
 -- HAVING clause controls which groups are available to the next phase of the query.
@@ -160,3 +165,39 @@ WHERE s.TotalDue < 500000-- where a sell is less then
 GROUP BY s.CustomerID 
 HAVING SUM(s.TotalDue)> 900000 -- sum greather then
 ORDER BY TOTAL_SALES DESC
+
+
+--LAB
+--Get all the years that a particular customer bought something from sales person id 278
+SELECT o.CustomerID,o.SalesPersonID, CONCAT(FirstName,' ', pp.LastName) AS CUSTOMER_NAME, YEAR(o.OrderDate) as ORDER_YEAR
+FROM AdventureWorks.Sales.SalesOrderHeader AS o
+INNER JOIN AdventureWorks.Sales.Customer c ON c.CustomerID= o.CustomerID
+INNER JOIN AdventureWorks.Person.Person pp ON pp.BusinessEntityID = c.PersonID
+WHERE o.SalesPersonID = 278
+AND pp.FirstName LIKE 'MAXWELL%'
+GROUP BY o.CustomerID, o.SalesPersonID, pp.FirstName, pp.LastName,YEAR(O.OrderDate)
+
+-- Write a SELECT Statement to Retrieve Groups of Product Categories Sold in a Specific Year and the customer id that bought them
+SELECT ppc.ProductCategoryID, ppc.Name, sah.CustomerID --  pp.Name, sad.ProductID, psc.Name,
+
+FROM AdventureWorks.Sales.SalesOrderHeader as sah
+INNER JOIN AdventureWorks.Sales.SalesOrderDetail sad ON sad.SalesOrderID = sah.SalesOrderID
+INNER JOIN AdventureWorks.Production.Product pp ON pp.ProductID = sad.ProductID
+INNER JOIN AdventureWorks.Production.ProductSubcategory psc ON psc.ProductCategoryID = pp.ProductSubcategoryID
+INNER JOIN AdventureWorks.Production.ProductCategory ppc ON ppc.ProductCategoryID = PSC.ProductCategoryID
+WHERE sah.OrderDate > '20080101' and sah.OrderDate < '20080103'
+GROUP BY ppc.ProductCategoryID, ppc.Name, sah.CustomerID
+
+-- ProductCategoryID	Name	CustomerID
+-- 1	Bikes	12041
+-- 1	Bikes	13648
+-- 1	Bikes	14420
+-- 1	Bikes	14456
+-- 1	Bikes	14580
+-- 1	Bikes	14581
+-- 1	Bikes	15684
+-- 2	Components	11427
+-- 2	Components	16422
+-- 2	Components	17848
+
+-- Exercise 2: Writing Queries That Use Aggregate Functions
