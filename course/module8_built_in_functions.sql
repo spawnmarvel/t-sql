@@ -212,12 +212,12 @@ SELECT
 
 -- Lab: Using Built-in Functions
 
-
+-- Task 2: Write a SELECT Statement that Uses the CAST or CONVERT Function
 SELECT 'The unit price for ' + p.Name + ' is ' + CAST(p.ListPrice as varchar) AS PRODUCT_INFO
 FROM [AdventureWorks].[Production].[Product] p
 WHERE p.ListPrice > 0
 
-/****** Script for SelectTopNRows command from SSMS  ******/
+-- Task 3: Write a SELECT Statement to Filter Rows Based on Specific Date Information
 --check what orders was sent fast, within 5 days and also print the purchase number and subsitute it, if it was missing
 SELECT o.SalesOrderID, o.OrderDate, o.ShipDate, o.ShipDate, COALESCE(o.PurchaseOrderNumber , 'Missing PO') as NO_PURCHASE_ORDER
 FROM [AdventureWorks].[Sales].[SalesOrderHeader] o
@@ -225,7 +225,7 @@ WHERE o.OrderDate >= PARSE('4/1/2007' AS DATETIME USING 'en-us') --input must be
 AND o.OrderDate <= PARSE('11/30/2007' AS DATETIME USING 'en-us') --input must be parsed
 AND o.ShipDate > DATEADD(DAY, 5, o.OrderDate)-- adds 5 days to the order date
 
-
+-- Task 4: Write a SELECT Statement to Convert the Phone Number Information to an Integer Value
 -- remove all signs from the phone number, 1 (11) 500 555-0110-> 1 11 500 5550110, 163-555-0147-> 1635550147
 SELECT pp.BusinessEntityID, REPLACE(REPLACE(REPLACE(pp.PhoneNumber, '-', ''), '(', ''), ')', '') AS PHONE_NR, pp.PhoneNumber, per.FirstName + per.LastName as FULL_NAME
 FROM [AdventureWorks].[Person].[PersonPhone] pp
@@ -246,3 +246,5 @@ INNER JOIN Person.Person per ON per.BusinessEntityID=pp.BusinessEntityID
 -- 295	NULL	334-555-0137	KimAbercrombie
 -- 2170	NULL	919-555-0100	KimAbercrombie
 -- 38	2085550114	208-555-0114	KimAbercrombie
+
+
