@@ -226,5 +226,23 @@ AND o.OrderDate <= PARSE('11/30/2007' AS DATETIME USING 'en-us') --input must be
 AND o.ShipDate > DATEADD(DAY, 5, o.OrderDate)-- adds 5 days to the order date
 
 
+-- remove all signs from the phone number, 1 (11) 500 555-0110-> 1 11 500 5550110, 163-555-0147-> 1635550147
+SELECT pp.BusinessEntityID, REPLACE(REPLACE(REPLACE(pp.PhoneNumber, '-', ''), '(', ''), ')', '') AS PHONE_NR, pp.PhoneNumber, per.FirstName + per.LastName as FULL_NAME
+FROM [AdventureWorks].[Person].[PersonPhone] pp
+INNER JOIN Person.Person per ON per.BusinessEntityID=pp.BusinessEntityID
 
+-- same as above but with convert to int, fails with (Conversion failed when converting the nvarchar value '1 11 500 5550110' to data type int.)
+SELECT pp.BusinessEntityID, CONVERT(int, REPLACE(REPLACE(REPLACE(pp.PhoneNumber, '-', ''), '(', ''), ')', '')) AS PHONE_NR, pp.PhoneNumber, per.FirstName + per.LastName as FULL_NAME
+FROM [AdventureWorks].[Person].[PersonPhone] pp
+INNER JOIN Person.Person per ON per.BusinessEntityID=pp.BusinessEntityID
 
+-- not all could be converted, then we use TRY_CONVERT, since the number can be bigger
+SELECT pp.BusinessEntityID, TRY_CONVERT(int, REPLACE(REPLACE(REPLACE(pp.PhoneNumber, '-', ''), '(', ''), ')', '')) AS PHONE_NR, pp.PhoneNumber, per.FirstName + per.LastName as FULL_NAME
+FROM [AdventureWorks].[Person].[PersonPhone] pp
+INNER JOIN Person.Person per ON per.BusinessEntityID=pp.BusinessEntityID
+-- BusinessEntityID	PHONE_NR	PhoneNumber	FULL_NAME
+-- 285	NULL	926-555-0182	SyedAbbas
+-- 293	NULL	747-555-0171	CatherineAbel
+-- 295	NULL	334-555-0137	KimAbercrombie
+-- 2170	NULL	919-555-0100	KimAbercrombie
+-- 38	2085550114	208-555-0114	KimAbercrombie
