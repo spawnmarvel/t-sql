@@ -46,4 +46,22 @@ FROM dbo.t1
 -- 1	NULL
 -- 2	10
 -- 3	30
+-- If you need to summarize all rows, whether NULL or not, consider replacing the NULLs with another value that can be used by your aggregate function.
 
+SELECT 
+SUM(c2) AS SUM_NON_NULLS,
+COUNT(*) AS COUNT_ALL_ROWS,
+COUNT(c2) AS COUNT_NON_NULLS,
+AVG(c2) AS [AVG]
+FROM [test].[dbo].[t1]
+
+-- SUM_NON_NULLS	COUNT_ALL_ROWS	COUNT_NON_NULLS	AVG
+-- 40	3	2	20
+
+SELECT 
+SUM(COALESCE(c2,0)) AS SUM_NON_NULLS,
+COUNT(*) AS COUNT_ALL_ROWS,
+COUNT(c2) AS COUNT_NON_NULLS,
+AVG(c2) AS [AVG]
+ FROM [test].[dbo].[t1]
+ 
