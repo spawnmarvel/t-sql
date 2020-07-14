@@ -61,4 +61,62 @@ RETURN
 	INNER JOIN production.products p ON p.product_id=i.product_id
 	WHERE YEAR(o.order_date)= @year_to_select
 
+-- Calling Table view functions
+SELECT customer_id, list_price, product_name, order_date
+FROM eco.AllOrdersPerYear(2018) as PY--Per Year
+
+CREATE FUNCTION eco.GetProductByPrice(@price_to_select INT)
+RETURNS TABLE
+AS
+RETURN
+SELECT order_id, item_id,product_id, quantity, list_price, discount
+FROM [BikeStores].[sales].[order_items]
+WHERE list_price > @price_to_select
+
+--
+SELECT * FROM eco.GetProductByPrice(200)
+ORDER BY list_price
+
+
+-- Writing Queries with Derived Tables
+-- Views and TVF are valuable when you reusing them, module, sourcre of other views.
+-- But sometimes need views for other complex queries
+-- allow you to write T-SQL statements that are more modular
+-- break down complex queries into more manageable parts
+-- derived tables in your queries can also provide workarounds for some of the restrictions imposed by the logical order of query processing
+-- such as the use of column aliases. 
+
+-- Derived table must
+-- have an alias
+-- have names for all columns
+-- have unique names for all columns
+-- not use order by clause without TOP / OFFSETT7FETCH
+-- not be referred to multiple times in the dame query
+
+-- Derived tables may
+-- use internal or external aliases fro clumns
+-- refer to paramters and or variables
+-- be nested within other derived tables
+
+-- Using Aliases for Column Names in Derived Tables
+SELECT YEAR(OrderDate) AS ORDER_YEAR, CustomerID
+FROM Sales.SalesOrderHeader AS DERIVED_TABLE
+
+--ORDER_YEAR	CustomerID
+-- 2005	29825
+-- 2005	29672
+-- 2005	29734
+
+SELECT ORDER_YEAR, COUNT(DISTINCT(CustomerID)) AS CUST_COUNT
+FROM(
+SELECT YEAR(OrderDate) AS ORDER_YEAR, CustomerID
+FROM Sales.SalesOrderHeader) AS DERIVED_TABLE --ALIAS INLINE
+GROUP BY ORDER_YEAR
+
+-- ORDER_YEAR	CUST_COUNT
+-- 2007	9864
+-- 2008	11844
+-- 2005	1216
+-- 2006	3094
+
 
