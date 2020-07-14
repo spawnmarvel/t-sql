@@ -80,4 +80,27 @@ WHERE order_date =
 	WHERE INNER_ORDERS.customer_id= OUTER_ORDERS.customer_id)
 ORDER BY customer_id
 
+-- Using the EXISTS Predicate with Subqueries
+-- When a sub1 is used with the keyword EXISTS, it functions as an existence test
+-- true or false, no rows passed back to the outer q
+-- EXISTS evaluates to TRUE or FALSE (not unknown)
+-- if any are returned by subq, EXISTS = true
+-- if no rows are returned by sub1, EXISTS = false
+
+-- get all customers that do not have an order
+SELECT customer_id, first_name
+FROM sales.customers AS C
+WHERE NOT EXISTS 
+(SELECT * 
+FROM sales.orders o
+WHERE c.customer_id=o.customer_id )
+
+-- get all customers that do have an order
+SELECT customer_id, first_name
+FROM sales.customers AS C
+WHERE EXISTS 
+(SELECT * 
+FROM sales.orders o
+WHERE c.customer_id=o.customer_id )
+
 
