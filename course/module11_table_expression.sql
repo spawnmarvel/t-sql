@@ -132,4 +132,9 @@ FROM(
 GROUP BY ORDER_YEAR
 
 -- Nesting and Reusing Derived Tables
--- querys on querys....and on and on, more complex data systems.
+-- querys on querys....and on and on, more complex data systems, multiple layers of derived tables
+-- Find avg daily sales for the week
+-- DERIVED TABLES MAY BE NESTED, THOUGH NOT RECOMMENDED.
+
+
+
