@@ -120,3 +120,13 @@ GROUP BY ORDER_YEAR
 -- 2006	3094
 
 
+-- Passing Arguments to Derived Tables
+-- Derived tables in SQL Server can accept arguments, function, stored procedure, T-SQL Batch
+DECLARE @year_to_select INT = 2007;
+SELECT ORDER_YEAR, COUNT(DISTINCT(CustomerID)) AS CUST_COUNT
+FROM(
+	SELECT YEAR(OrderDate) AS ORDER_YEAR, CustomerID
+	FROM Sales.SalesOrderHeader
+	WHERE YEAR(OrderDate)= @year_to_select --VARIABLE
+    ) AS DERIVED_TABLE --ALIAS
+GROUP BY ORDER_YEAR
