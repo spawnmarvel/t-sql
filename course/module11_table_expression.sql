@@ -39,3 +39,15 @@ INNER JOIN sales.orders o ON o.customer_id=c.customer_id
 INNER JOIN sales.order_items i ON i.order_id=o.order_id
 INNER JOIN production.products p ON p.product_id=i.product_id
 
+-- Using Inline TVFs, table view functions
+-- A primary distinction between a view and an inline TVF is that the latter can accept input parameters and refer to them in the embedded SELECT statement.
+-- TVF are named tabel expression with definitions stored in a database
+-- TVf return virtual table to the calling quere
+-- SQL server provides two types of TVF
+-- Inline based on a single SELECT stament
+-- Multi statment, which creates and loads a table variabel
+-- TVF supports paramaters
+-- think of them as parameterized views
+
+
+
