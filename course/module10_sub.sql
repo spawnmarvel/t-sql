@@ -103,4 +103,28 @@ WHERE EXISTS
 FROM sales.orders o
 WHERE c.customer_id=o.customer_id )
 
+-- all customers that have person id
+use AdventureWorks
 
+SELECT CustomerID, PersonID
+FROM Sales.Customer AS c
+WHERE EXISTS (
+SELECT * FROM Sales.SalesOrderHeader AS o
+where o.CustomerID=c.CustomerID)
+-- CustomerID, Person ID
+-- 11000	13531
+-- 11001	5454
+-- 11002	11269
+
+-- all customers that do not have person id
+use AdventureWorks
+
+SELECT CustomerID, PersonID
+FROM Sales.Customer AS c
+WHERE NOT EXISTS (
+SELECT * FROM Sales.SalesOrderHeader AS o
+where o.CustomerID=c.CustomerID)
+ORDER BY CustomerID desc
+-- 701	NULL
+-- 700	NULL
+-- 699	NULL
