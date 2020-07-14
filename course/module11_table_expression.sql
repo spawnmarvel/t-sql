@@ -130,3 +130,6 @@ FROM(
 	WHERE YEAR(OrderDate)= @year_to_select --VARIABLE
     ) AS DERIVED_TABLE --ALIAS
 GROUP BY ORDER_YEAR
+
+-- Nesting and Reusing Derived Tables
+-- querys on querys....and on and on, more complex data systems.
