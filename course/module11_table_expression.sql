@@ -49,5 +49,16 @@ INNER JOIN production.products p ON p.product_id=i.product_id
 -- TVF supports paramaters
 -- think of them as parameterized views
 
+CREATE FUNCTION eco.AllOrdersPerYear(@year_to_select INT)
+RETURNS TABLE 
+AS
+RETURN
+--get all customers and all orders with the date and productname
+	SELECT c.customer_id, c.first_name, c.last_name, o.order_id, i.list_price, p.product_name, o.order_date
+	FROM [BikeStores].[sales].[customers] AS c
+	INNER JOIN sales.orders o ON o.customer_id=c.customer_id
+	INNER JOIN sales.order_items i ON i.order_id=o.order_id
+	INNER JOIN production.products p ON p.product_id=i.product_id
+	WHERE YEAR(o.order_date)= @year_to_select
 
 
