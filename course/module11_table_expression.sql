@@ -77,6 +77,8 @@ WHERE list_price > @price_to_select
 SELECT * FROM eco.GetProductByPrice(200)
 ORDER BY list_price
 
+-- Derived table is another name for subquery - a select statement within another query. It's not persisted after the query finishes, it may not even be stored at all
+-- A temp table is a real table that's stored in the TempDB database, column, indexes, constraints, etc. It persists until dropped or until the procedure that created it completes or the connection that creates it closes.
 
 -- Writing Queries with Derived Tables
 -- Views and TVF are valuable when you reusing them, module, sourcre of other views.
@@ -137,4 +139,39 @@ GROUP BY ORDER_YEAR
 -- DERIVED TABLES MAY BE NESTED, THOUGH NOT RECOMMENDED.
 
 
+-- Demonstration: Using Derived Tables
+-- This will be the source
+SELECT s.SalesOrderID, YEAR(o.OrderDate) AS OrderYear, MONTH(o.OrderDate) AS OrderMonth,SUM(s.UnitPrice * s.OrderQty)AS TotalOrder
+FROM Sales.SalesOrderDetail as s
+INNER JOIN Sales.SalesOrderHeader o ON o.SalesOrderID= s.SalesOrderID
+GROUP BY  s.SalesOrderID, YEAR(o.OrderDate) , MONTH(o.OrderDate)
+-- SalesOrderID, OrderYear, OrdrMonth, TotalOrder
+-- 43659	2005	7	20565.6206
+-- 43660	2005	7	1294.2529
+-- 43661	2005	7	32726.4786
+-- 43662	2005	7	28832.5289
+
+SELECT *
+FROM (
+-- source begin
+SELECT s.SalesOrderID, YEAR(o.OrderDate) AS OrderYear, MONTH(o.OrderDate) AS OrderMonth,SUM(s.UnitPrice * s.OrderQty)AS TotalOrder
+FROM Sales.SalesOrderDetail as s
+INNER JOIN Sales.SalesOrderHeader o ON o.SalesOrderID= s.SalesOrderID
+GROUP BY  s.SalesOrderID, YEAR(o.OrderDate) , MONTH(o.OrderDate)
+-- source end
+) AS OT
+
+-- Gives the same result, so it works
+
+-- Now we can use the derived columns
+SELECT OrderYear, OrderMonth, AVG(TotalOrder) AverageOrder -- from derived
+FROM (
+-- source begin
+	SELECT s.SalesOrderID, YEAR(o.OrderDate) AS OrderYear, MONTH(o.OrderDate) AS OrderMonth,SUM(s.UnitPrice * s.OrderQty)AS TotalOrder
+	FROM Sales.SalesOrderDetail as s
+	INNER JOIN Sales.SalesOrderHeader o ON o.SalesOrderID= s.SalesOrderID
+	GROUP BY  s.SalesOrderID, YEAR(o.OrderDate) , MONTH(o.OrderDate)
+-- source end
+) AS OT
+GROUP BY OrderYear, OrderMonth
 
