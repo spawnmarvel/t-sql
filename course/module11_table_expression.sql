@@ -203,3 +203,19 @@ GROUP BY OrderYear
 
 
 
+-- DEMO get annual sales
+WITH AnnualSales AS
+( -- source
+SELECT s.SalesOrderID, YEAR(o.OrderDate) AS OrderYear, MONTH(o.OrderDate) AS OrderMonth,SUM(s.UnitPrice * s.OrderQty)AS TotalSales
+FROM Sales.SalesOrderDetail as s
+INNER JOIN Sales.SalesOrderHeader o ON o.SalesOrderID= s.SalesOrderID
+GROUP BY  s.SalesOrderID, YEAR(o.OrderDate) , MONTH(o.OrderDate)
+)
+SELECT
+	c.OrderYear, c.OrderMonth, c.TotalSales AS CSales, p.TotalSales as PSales
+
+FROM
+	AnnualSales AS c INNER JOIN AnnualSales as p
+	ON c.OrderMonth=p.OrderMonth AND c.OrderYear=P.OrderYear +1;
+
+    
