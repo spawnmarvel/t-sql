@@ -175,3 +175,31 @@ FROM (
 ) AS OT
 GROUP BY OrderYear, OrderMonth
 
+-- Lesson 4: Using CTEs, Comon table expressions
+-- are named expressions defined in a query. Like subqueries and derived tables, 
+-- provide a means to break down query problems into smaller, more modular units.
+-- Views and derived table good concepts, but have some drawbacks
+-- CTE are named table expressions
+-- CTE uses less T-SQL writings
+-- CTE are similar to derived tables in scope and naming requiremenets
+-- Unlike derived tables, CTE support multiple definitions, multiple references and recursion
+-- CTE is good, much easier to maintain and the same separations like the view and can reuse this,
+-- cannot reuse derived table
+
+-- To Create a CTE
+-- Define the table expression in a WITH clause
+-- Assign column aliases (inline or external)
+-- Pass arguments if desired
+-- Reference the CTE in the outer query
+
+WITH CTE_year AS
+(-- beg source
+SELECT YEAR(OrderDate) AS OrderYear, CustomerID
+FROM Sales.SalesOrderHeader
+)-- end source
+SELECT OrderYear, COUNT(DISTINCT(CustomerID)) AS Cust_Count
+from CTE_year
+GROUP BY OrderYear
+
+
+
