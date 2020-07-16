@@ -96,7 +96,7 @@ ORDER BY list_price
 -- not be referred to multiple times in the dame query
 
 -- Derived tables may
--- use internal or external aliases fro clumns
+-- use internal or external aliases from columns
 -- refer to paramters and or variables
 -- be nested within other derived tables
 
@@ -218,4 +218,4 @@ FROM
 	AnnualSales AS c INNER JOIN AnnualSales as p
 	ON c.OrderMonth=p.OrderMonth AND c.OrderYear=P.OrderYear +1;
 
-    
+
