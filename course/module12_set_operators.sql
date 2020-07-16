@@ -121,14 +121,111 @@ FROM sales.orders
 -- store_id
 -- 4
 
---Using the APPLY operator
+-- Using the APPLY operator
 -- Is a table operator used in FROM clause
 -- There is 2 forms, CROSS AND OUTER APPLY
 -- Operates on two tables, left and right
--- Right tablemay be any table expression including a derived
+-- Right table may be any table expression including a derived
 -- table or table-valued function
 
 -- SELECT column
 -- FROM left table AS alias
 -- CROSS | OUTER APPLY
 -- RIGHT table as alias
+
+-- Evaluate rows in one input set with the second
+-- Apply is a table operator, it is used like a JOIN in the FROM clause
+-- Apply differs from correlated subqueries by returning a table valued result, not scalar or multi valued result.
+-- The second or right table source is processed once per row in the first, left table source.
+
+-- CROSS APPLY
+-- Applies to the right table for each row in the left
+-- Only rows that exists in both are returned
+-- Most INNER JOIN statments can be written as CROSS APPLY
+
+
+-- OUTER APPLY
+-- Applies to right table source to each row in the left
+-- All rows from the left table source are returned
+-- Values from the right table source are returned where they exists, otherwise NULL is returned
+-- Most LEFT OUTER JOIN statments can be rewritten as OUTER APPLY
+
+-- Create some tables to demonstrate
+USE BikeStores;
+go
+CREATE SCHEMA module12;
+go
+CREATE TABLE module12.categories (
+	category_id INT IDENTITY (1, 1) PRIMARY KEY,
+	category_name VARCHAR (255) NOT NULL
+	)
+
+CREATE TABLE module12.products (
+	product_id INT IDENTITY (1, 1) PRIMARY KEY,
+	product_name VARCHAR (255) NOT NULL,
+	category_id INT NOT NULL,
+	FOREIGN KEY (category_id) REFERENCES production.categories (category_id) ON DELETE CASCADE ON UPDATE CASCADE
+	)
+
+-- data
+SELECT c.category_id, c.category_name
+FROM BikeStores.module12.categories as c
+-- RETURNS
+-- category_id	category_name
+-- 1	bikes
+-- 2	cars
+-- 3	houses
+-- 4	tools
+-- OUTER APPLY
+
+SELECT * FROM BikeStores.module12.products as i
+-- product_id	product_name	category_id
+-- 1	volvo	1
+-- 2	bmx	2
+-- 3	flat	3
+
+-- CROSS APPLY
+SELECT c.category_id, c.category_name,
+od.product_id, od.product_name
+FROM BikeStores.module12.categories as c
+CROSS APPLY
+	(SELECT product_id, product_name
+	FROM BikeStores.module12.products AS i
+	WHERE i.category_id=c.category_id)
+AS od
+-- INNER JOIN
+SELECT c.category_id, c.category_name,
+od.product_id, od.product_name
+FROM BikeStores.module12.categories as c
+	INNER JOIN BikeStores.module12.products AS od
+	ON od.category_id=c.category_id
+
+-- Returns both the same
+-- category_id	category_name	product_id	product_name
+-- 1	bikes	1	volvo
+-- 2	cars	2	bmx
+-- 3	houses	3	flat
+
+
+-- OUTER APPLY
+SELECT c.category_id, c.category_name,
+od.product_id, od.product_name
+FROM BikeStores.module12.categories as c
+OUTER APPLY
+	(SELECT product_id, product_name
+	FROM BikeStores.module12.products AS i
+	WHERE i.category_id=c.category_id)
+AS od
+-- LEFT JOIN
+SELECT c.category_id, c.category_name,
+od.product_id, od.product_name
+FROM BikeStores.module12.categories as c
+	LEFT JOIN BikeStores.module12.products AS od
+	ON od.category_id=c.category_id
+
+-- Returns both the same
+-- category_id	category_name	product_id	product_name
+-- 1	bikes	1	volvo
+-- 2	cars	2	bmx
+-- 3	houses	3	flat
+-- 4	tools	NULL	NULL
