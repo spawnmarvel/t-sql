@@ -25,8 +25,8 @@
   SELECT product_name, color
   FROM [test].[dbo].[ProductTarget]
 
-  -- both returns the same
-  -- product_name	color
+-- both returns the same
+-- product_name	color
 -- volvo s90	red
 -- bmw	black
 -- fiat	blue
@@ -69,3 +69,66 @@ FROM dbo.ProductTarget
 
 -- UNION ALL does not filter out duplicate rows. 
 
+-- Using EXCEPT and INTERSECT
+-- INTERSECT operator
+-- Returns the distinct set of rows that appear in both input results sets
+-- Only the rows that exists in both set will be returned
+SELECT store_id 
+FROM [BikeStores].[sales].[stores]
+-- returns 3 rows
+-- store_id
+-- 1
+-- 2
+-- 3
+SELECT store_id
+FROM sales.orders
+--return 1615 rows,,
+-- store_id
+-- 1
+-- 2
+-- 2
+-- 1
+-- 2
+-- 2
+SELECT store_id 
+FROM [BikeStores].[sales].[stores]
+INTERSECT
+SELECT store_id
+FROM sales.orders
+-- returns 3 rows,returns only distinct rows that appear in both input sets. 
+
+-- Using the EXCEPT Operator
+-- Returns only distinct rows that appear in the left set but not the right
+
+-- If we update the stores table with one more store
+SELECT store_id, store_name
+FROM [BikeStores].[sales].[stores]
+-- Result
+-- store_id	store_name
+-- 1	Santa Cruz Bikes
+-- 2	Baldwin Bikes
+-- 3	Rowlett Bikes
+-- 4	Bergen Bikes
+
+-- We added Bergen Bikes
+SELECT store_id
+FROM [BikeStores].[sales].[stores]
+EXCEPT
+SELECT store_id
+FROM sales.orders
+
+-- And the result returned is just the new store
+-- store_id
+-- 4
+
+--Using the APPLY operator
+-- Is a table operator used in FROM clause
+-- There is 2 forms, CROSS AND OUTER APPLY
+-- Operates on two tables, left and right
+-- Right tablemay be any table expression including a derived
+-- table or table-valued function
+
+-- SELECT column
+-- FROM left table AS alias
+-- CROSS | OUTER APPLY
+-- RIGHT table as alias
