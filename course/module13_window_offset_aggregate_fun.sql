@@ -161,5 +161,59 @@ SELECT TOP (1000) [customer_id]
   ORDER BY category_id
   
 -- Lesson 2: Exploring Window Functions
+-- Window function is used on window, set or row
+-- Window function inc: aggregate, ranking, distribution, offset
+-- Window function depends on the set in the OVER
 
+-- Window Aggregate Functions
+-- like group by, SUM, MIN, MAX
+-- Applied to the window, not all data
+-- Support partitioning, ordering and framing
 
+-- select total orders per customer, this can only be done in window function, all aggregate can be used this way
+SELECT s.customer_id,MONTH(s.order_date) AS order_month,s.order_date, i.quantity,
+SUM(i.quantity) OVER(PARTITION BY s.customer_id) AS TotalPerCust
+FROM [BikeStores].[sales].[order_items] i
+INNER JOIN sales.orders s ON s.order_id=i.order_id
+
+-- customer_id	order_month	order_date	quantity	TotalPerCust
+-- 1	12	2016-12-09	2	17
+-- 1	12	2016-12-09	2	17
+-- 1	12	2016-12-09	1	17
+-- 1	12	2016-12-09	2	17
+
+-- The max TotalPerCust
+WITH TotalDerivedT AS
+(
+SELECT s.customer_id,MONTH(s.order_date) AS order_month,s.order_date, i.quantity,
+SUM(i.quantity) OVER(PARTITION BY s.customer_id) AS TotalPerCust
+FROM [BikeStores].[sales].[order_items] i
+INNER JOIN sales.orders s ON s.order_id=i.order_id
+)
+SELECT MAX(TotalDerivedT.TotalPerCust) max_orders
+FROM TotalDerivedT
+-- max_orders
+-- 19
+
+-- Ranking function only within a window order clause
+-- RANK (Will have holes, 1,1,4), DENSE_RANK(No holes, 1,2,3), ROW_NUMBER(Unique seq row number, just gives number), NTILE (cool, all gets in groups, bucket1, 2 etc.)
+
+-- Window Distribution Functions, statistic analysis on data, PERCENT_RANK, CUME_DIST
+-- Inverse PERCENTILE_CONT, PERECENTILE_DISC
+
+-- Window Offset Functions / Data analysis
+-- Allow comparisons between rows without a self join, is cool
+-- Good for analysis over time
+-- Operate on positition to the current row, end or start
+-- LAG (compare to previous year), LEAD(looking in another directions / window), FIRST_VALUE(first in current window), LAST_VALUE(last in curretn window)
+
+-- Examples Lead
+-- Current compared to next year
+
+-- get staff id and total sales
+SELECT st.staff_id, COUNT(sa.order_id) AS total_orders_by_emp, SUM(it.list_price*it.quantity) AS all_sale
+FROM sales.staffs as st
+INNER JOIN sales.orders sa ON sa.staff_id=st.staff_id
+INNER JOIN sales.order_items it ON it.order_id=sa.order_id
+GROUP BY st.staff_id
+ORDER BY st.staff_id
