@@ -217,3 +217,10 @@ INNER JOIN sales.orders sa ON sa.staff_id=st.staff_id
 INNER JOIN sales.order_items it ON it.order_id=sa.order_id
 GROUP BY st.staff_id
 ORDER BY st.staff_id
+
+
+SELECT employee, orderyear, totalsales as currsales
+    LEAD(totalsales, 1,0) OVER (PARTITION BY employee)
+        ORDER BY orderyear) AS nextsales
+FROM SalesOrdersByEmployeeYear --THIS IS A VIEW
+ORDER BY employee, orderyear
