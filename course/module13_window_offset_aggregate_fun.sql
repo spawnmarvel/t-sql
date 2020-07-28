@@ -73,4 +73,93 @@ ORDER BY SalesOrderID
 -- 43659	711	4	26
 -- 43660	762	1	2
 
--- Total OrderQty = 26 for SalesOrderID
+-- Total OrderQty = 26 for SalesOrderID 43659
+-- In order to do the same: create tabel expressions that calculates sum expression and join's into detail data
+
+-- Ordering and Framing
+-- Allows to set start, end within window partition
+-- UNBOUNDED, go to all the way to direction PRECEDING or FOLLOWING (start or end)
+-- CURRENT ROW, indicates start or end in partition
+-- ROWS BETWEEN, define range of rows between 2 points.
+-- Window ordering provides a contex to the frame
+-- sort enables meaning to position
+-- Without ordering "starte at 1 row" is has now order, i.e not useful.
+
+-- Examples
+-- If we change the old view and add the category name
+USE BikeStores
+GO
+CREATE VIEW [eco].[AllOrderswithCategoryID] AS
+--get all customers and all orders with the date and productname
+SELECT c.customer_id, c.first_name, c.last_name, o.order_id, i.list_price, p.product_name, o.order_date, ca.category_name, ca.category_id
+FROM [BikeStores].[sales].[customers] AS c
+INNER JOIN sales.orders o ON o.customer_id=c.customer_id
+INNER JOIN sales.order_items i ON i.order_id=o.order_id
+INNER JOIN production.products p ON p.product_id=i.product_id
+INNER JOIN production.categories ca ON ca.category_id=p.product_id
+GO
+
+-- Result
+-- customer_id	first_name	last_name	order_id	list_price	product_name	order_date	category_name category_id
+-- 259	Johnathan	Velazquez	1	1799.99	Trek Remedy 29 Carbon Frameset - 2016	2016-01-01	Road bike 8
+-- 259	Johnathan	Velazquez	1	2899.99	Trek Fuel EX 8 29 - 2016	2016-01-01	Cyclocross Bicycles 4
+-- 523	Joshua	Robertson	3	999.99	Surly Wednesday Frameset - 2016	2016-01-02	Cruisers Bicycles 3
+
+-- rank by price, 1 is the most expensive
+SELECT TOP (1000) [customer_id]
+      ,[first_name]
+      ,[last_name]
+      ,[order_id]
+      ,[list_price]
+      ,[product_name]
+      ,[order_date]
+      ,[category_name]
+      ,[category_id]
+	  ,  RANK() OVER(ORDER BY [list_price] DESC) AS PriceRank
+  FROM [BikeStores].[eco].[AllOrderswithCategoryID]
+  --ORDER BY category_name
+
+-- customer_id	first_name	last_name	order_id	list_price	product_name	order_date	category_name PriceRank
+-- 60	Neil	Mccall	9	3999.99	Trek Slash 8 27.5 - 2016	2016-01-05	Road Bikes	1
+-- 541	Lanita	Burton	18	3999.99	Trek Slash 8 27.5 - 2016	2016-01-14	Road Bikes	1
+-- 1280	Jackeline	Colon	26	3999.99	Trek Slash 8 27.5 - 2016	2016-01-18	Road Bikes	1
+-- [...]
+
+-- rank by price, 1 is the most expensive
+-- partition by window category id
+  SELECT TOP (1000) [customer_id]
+      ,[first_name]
+      ,[last_name]
+      ,[order_id]
+      ,[list_price]
+      ,[product_name]
+      ,[order_date]
+      ,[category_name]
+      ,[category_id]
+	  ,  RANK() OVER(PARTITION BY [category_id] ORDER BY [list_price] DESC) AS PriceRank
+  FROM [BikeStores].[eco].[AllOrderswithCategoryID]
+  ORDER BY category_id
+
+
+  WITH CP AS -- derived table
+  (
+  SELECT TOP (1000) [customer_id]
+      ,[first_name]
+      ,[last_name]
+      ,[order_id]
+      ,[list_price]
+      ,[product_name]
+      ,[order_date]
+      ,[category_name]
+      ,[category_id]
+	  ,  RANK() OVER(PARTITION BY [category_id] ORDER BY [list_price] DESC) AS PriceRank
+  FROM [BikeStores].[eco].[AllOrderswithCategoryID]
+  
+  )
+  SELECT * FROM CP
+  WHERE CP.PriceRank <= 500
+  ORDER BY category_id
+  
+-- Lesson 2: Exploring Window Functions
+
+
