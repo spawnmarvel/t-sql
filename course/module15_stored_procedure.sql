@@ -28,5 +28,7 @@ EXEC uspGetEmployeeManagers @BusinessEntityID=100;
 
 
 -- Lesson 2: Passing Parameters to Stored Procedures
+
 -- Lesson 3: Creating Simple Stored Procedures
+
 -- Lesson 4: Working with Dynamic SQL
