@@ -12,5 +12,21 @@ EXEC uspGetEmployeeManagers @BusinessEntityID=100;
 -- 1	93	Kok-Ho	Loh	/3/1/9/	Peter	Krebs
 -- 2	26	Peter	Krebs	/3/1/	James	Hamilton
 
+
+-- Lesson 1: Querying Data with Stored Procedures
 -- Examining Stored Procedures
 -- Statments stored in db
+
+
+
+
+
+
+
+
+
+
+
+-- Lesson 2: Passing Parameters to Stored Procedures
+-- Lesson 3: Creating Simple Stored Procedures
+-- Lesson 4: Working with Dynamic SQL
