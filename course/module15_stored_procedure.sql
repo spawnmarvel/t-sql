@@ -16,19 +16,62 @@ EXEC uspGetEmployeeManagers @BusinessEntityID=100;
 -- Lesson 1: Querying Data with Stored Procedures
 -- Examining Stored Procedures
 -- Statments stored in db
+-- Can return result, DML data, and do admin task, like system configuration and maintenance
+-- Provide API to interface to db
+-- Use, views, func and proc to return data
 
 
-
-
-
-
-
-
+-- Executing Stored Procedures
+-- If the procedure accepts NVARCHAR, pass in the Unicode character string format: N'string'. 
 
 
 
 -- Lesson 2: Passing Parameters to Stored Procedures
+-- Param are defined in header of procedure, data type, name, input etc
+-- Param can be found in sys.parameters view
+-- Parameters names, passed in proc with @
+
+use AdventureWorks2012
+GO
+EXEC uspGetEmployeeManagers @BusinessEntityID=100; -- call proc with param
+
+
+-- Working with OUTPUT Parameters
+-- Allow to return values from stored procedure
+-- Para marked for output in proc header and calling query
+
 
 -- Lesson 3: Creating Simple Stored Procedures
+-- Proc can be wrapper for all SELECT statments
+-- As mentioned have input and output and return val
+-- CREATE PROCEDURE schema_name.procedure_name
+-- Modify with ALTER, thete is no need to recreaet or drop
+
+CREATE SCHEMA customer;
+GO
+CREATE PROCEDURE customer.GetOrderInformation
+AS
+--Get all order information on customers
+SELECT sod.[SalesOrderID]
+      ,sod.[OrderQty]
+      ,sod.[ProductID]
+      ,sod.[SpecialOfferID]
+      ,sod.[UnitPrice]
+      ,sod.[UnitPriceDiscount]
+      ,sod.[LineTotal]
+	  ,soh.CustomerID
+	  ,soh.OrderDate
+FROM [AdventureWorks].[Sales].[SalesOrderDetail] AS sod
+INNER JOIN sales.SalesOrderHeader AS soh ON soh.SalesOrderID=sod.SalesOrderID
+ORDER BY sod.LineTotal desc
+
+-- Execute the procedure
+EXEC customer.GetOrderInformation
+-- SalesOrderID, OrderQty, ProductID, SpecialOfferID, UnitPrice, UnitPriceDiscount, LineTotal, CustomerID, OrderDate
+-- 47378	3	787	1	647.994	0.00	1943.982000	30118	2006-09-01 00:00:00.000
+-- 47378	2	716	1	28.8404	0.00	57.680800	30118	2006-09-01 00:00:00.000
+-- 47378	2	861	1	22.794	0.00	45.588000	30118	2006-09-01 00:00:00.000
+-- 47378	1	784	1	1229.4589	0.00	1229.458900	30118	2006-09-01 00:00:00.000
+
 
 -- Lesson 4: Working with Dynamic SQL
