@@ -128,3 +128,48 @@ ORDER BY sod.LineTotal desc
 -- 71803	4	783	1	1376.994	0.00	5507.976000	30118	2008-06-01 00:00:00.000
 
 -- Lesson 4: Working with Dynamic SQL
+-- Constructing Dynamic SQL
+
+-- Dynamic SQL assembled to character string, interpreted to a commando, then executed
+-- Flexibility for admin and programming task, situations
+-- Two methods:
+-- EXCE cmd accept string as inp in ()
+-- System stored built in, sp_executesql also supports parameter
+-- Risk with input strings in dynamic SQL
+
+-- Writing Queries with Dynamic SQL
+-- sp_executesql
+-- inp is string as code to run
+-- support inp, out parameters
+-- can be parameterized code to minimizing risk from SQL injection
+-- Can preform better than EXEC, according to reuse of a query plan
+
+DECLARE @sqlcode_string AS NVARCHAR(300) = N'<code_to_run>';
+EXEC sys.sp_executesql @statement = @sqlcode_string;
+GO
+
+-- SELECT s.BusinessEntityID, s.Bonus FROM Sales.SalesPerson s
+
+DECLARE @sqlcode_string AS NVARCHAR(300) = N'SELECT s.BusinessEntityID, s.Bonus FROM Sales.SalesPerson s';
+EXEC sys.sp_executesql @statement = @sqlcode_string;
+GO
+
+-- BusinessEntityID, Bonus
+-- 274	0.00
+-- 275	4100.00
+-- 276	2000.00
+-- 277	2500.00
+-- 278	500.00
+
+-- sp_executesql with paramters. have the code and two paramters:
+-- @statment, unicode string with code or query
+-- @params, unicode string var, with a comma-separated list of param name, type of data
+
+DECLARE @sqlcode_string AS NVARCHAR(300) ;
+DECLARE @entity_id AS INT;
+SET @sqlcode_string= N'SELECT BusinessEntityID, Bonus FROM Sales.SalesPerson WHERE BusinessEntityID=@entity_id ';
+EXEC sys.sp_executesql @statement = @sqlcode_string, @params=N'@entity_id AS INT', @entity_id=290;
+GO
+
+-- BusinessEntityID, Bonus
+-- 290	985.00
