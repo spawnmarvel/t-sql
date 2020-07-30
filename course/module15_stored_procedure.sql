@@ -28,7 +28,7 @@ EXEC uspGetEmployeeManagers @BusinessEntityID=100;
 
 -- Lesson 2: Passing Parameters to Stored Procedures
 -- Param are defined in header of procedure, data type, name, input etc
--- Param can be found in sys.parameters view
+-- Param can be found in sys.parameters view or SSMS for stored procedure
 -- Parameters names, passed in proc with @
 
 use AdventureWorks2012
