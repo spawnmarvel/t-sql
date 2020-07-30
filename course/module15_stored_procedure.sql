@@ -64,9 +64,11 @@ SELECT sod.[SalesOrderID]
 FROM [AdventureWorks].[Sales].[SalesOrderDetail] AS sod
 INNER JOIN sales.SalesOrderHeader AS soh ON soh.SalesOrderID=sod.SalesOrderID
 ORDER BY sod.LineTotal desc
+GO
 
 -- Execute the procedure
 EXEC customer.GetOrderInformation
+GO
 -- SalesOrderID, OrderQty, ProductID, SpecialOfferID, UnitPrice, UnitPriceDiscount, LineTotal, CustomerID, OrderDate
 -- 47378	3	787	1	647.994	0.00	1943.982000	30118	2006-09-01 00:00:00.000
 -- 47378	2	716	1	28.8404	0.00	57.680800	30118	2006-09-01 00:00:00.000
@@ -89,5 +91,16 @@ FROM [AdventureWorks].[Sales].[SalesOrderDetail] AS sod
 INNER JOIN sales.SalesOrderHeader AS soh ON soh.SalesOrderID=sod.SalesOrderID
 WHERE YEAR(soh.OrderDate)= @check_year
 ORDER BY sod.LineTotal desc
+GO
+
+-- Execute the procedure
+EXEC customer.GetOrderInformationByYear @check_year=2008;
+GO
+
+-- 63291	17	780	3	1275.9945	0.05	20607.311175	29913	2008-02-01 00:00:00.000
+-- 67297	16	783	3	1262.2445	0.05	19186.116400	29497	2008-04-01 00:00:00.000
+-- 69437	16	782	3	1262.2445	0.05	19186.116400	29712	2008-05-01 00:00:00.000
+-- 71783	25	976	4	850.495	0.10	19136.137500	29957	2008-06-01 00:00:00.000
+
 
 -- Lesson 4: Working with Dynamic SQL
