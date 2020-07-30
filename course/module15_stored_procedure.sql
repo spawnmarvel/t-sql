@@ -73,5 +73,21 @@ EXEC customer.GetOrderInformation
 -- 47378	2	861	1	22.794	0.00	45.588000	30118	2006-09-01 00:00:00.000
 -- 47378	1	784	1	1229.4589	0.00	1229.458900	30118	2006-09-01 00:00:00.000
 
+CREATE PROCEDURE customer.GetOrderInformationByYear (@check_year AS INT)
+AS
+--Get all order information on customers by year
+SELECT sod.[SalesOrderID]
+      ,sod.[OrderQty]
+      ,sod.[ProductID]
+      ,sod.[SpecialOfferID]
+      ,sod.[UnitPrice]
+      ,sod.[UnitPriceDiscount]
+      ,sod.[LineTotal]
+	  ,soh.CustomerID
+	  ,soh.OrderDate
+FROM [AdventureWorks].[Sales].[SalesOrderDetail] AS sod
+INNER JOIN sales.SalesOrderHeader AS soh ON soh.SalesOrderID=sod.SalesOrderID
+WHERE YEAR(soh.OrderDate)= @check_year
+ORDER BY sod.LineTotal desc
 
 -- Lesson 4: Working with Dynamic SQL
