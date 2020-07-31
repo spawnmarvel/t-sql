@@ -54,9 +54,53 @@ GO
 
 
 -- vars for stored proc
+USE AdventureWorks
 DECLARE @check_y INT =2008;
 DECLARE @check_c INT =30118;
 
-EXEC customer.GetOrderInformationByYearAndCustomerID @check_year = check_y,@check_customer_id = check_c;
+EXEC [customer].[GetOrderInformationByYearAndCustomerID] @check_year = @check_y, @check_customer_id = @check_c;
+go
+
+
+-- assigning to variables
+DECLARE @var AS INT =100;
+
+DECLARE @var1 AS NVARCHAR(255);
+SET @var1 = N'my string';
+DECLARE @var2 AS NVARCHAR(255);
+SELECT @var2 = Name FROM [AdventureWorks].[Sales].[Store] WHERE BusinessEntityID = 292;
+
+SELECT @var AS v, @var1 AS v1, @var2 AS V2 
+GO
+--100	my string	Next-Door Bike Store
+
+-- synonyms
+-- 1 call proc
+USE AdventureWorks
+
+DECLARE @check_y INT =2008;
+DECLARE @check_c INT =30118;
+
+EXEC [customer].[GetOrderInformationByYearAndCustomerID] @check_year = @check_y, @check_customer_id = @check_c;
+go
+
+-- 2 switch db
+USE tempdb
+GO
+
+-- 3 create synonym
+CREATE SYNONYM dbo.tempOrder FOR Adventureworks.customer.GetOrderInformationByYearAndCustomerID;
+EXEC dbo.tempOrder @check_year =2008, @check_customer_id = 30118;
+go
+
+
+--view synonyms
+SELECT * FROM sys.synonyms
+GO
+-- drop
+DROP SYNONYM tempOrder
+
+
+
 
 
