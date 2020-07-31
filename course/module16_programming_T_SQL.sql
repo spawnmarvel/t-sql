@@ -84,14 +84,14 @@ DECLARE @check_c INT =30118;
 EXEC [customer].[GetOrderInformationByYearAndCustomerID] @check_year = @check_y, @check_customer_id = @check_c;
 go
 
--- 2 switch db
+-- 2 switch db to temp
 USE tempdb
 GO
 
 -- 3 create synonym
 CREATE SYNONYM dbo.tempOrder FOR Adventureworks.customer.GetOrderInformationByYearAndCustomerID;
 EXEC dbo.tempOrder @check_year =2008, @check_customer_id = 30118;
-go
+GO
 
 
 --view synonyms
@@ -99,6 +99,96 @@ SELECT * FROM sys.synonyms
 GO
 -- drop
 DROP SYNONYM tempOrder
+
+-- Understanding T-SQL Control-of-Flow Language
+-- Used in batches, proc and statments
+-- Control of the flow
+-- Includes:
+-- IF..ELSE, BEGIN..END, WHILE RETURN, BREAK, CONTINUE, WAITFOR
+
+-- IF
+DECLARE @var AS NVARCHAR(255);
+SELECT @var=  [Title] FROM [AdventureWorks].[Person].[Person]
+IF @var IS NULL
+	BEGIN
+		PRINT 'IS NULL, NOT EXISTING';
+	END
+
+
+
+
+-- IF ELSE
+DECLARE @var AS NVARCHAR(255);
+SELECT @var=  [Title] FROM [AdventureWorks].[Person].[Person]
+IF @var IS NULL
+	BEGIN
+		PRINT 'IS NULL, NOT EXISTING';
+	END
+ELSE
+	PRINT 'NOT NULL';
+GO
+
+-- IF
+IF EXISTS (SELECT Title FROM [AdventureWorks].[Person].[Person] WHERE Title like 'M%')
+BEGIN
+	PRINT 'There is a title that starts with M'
+END
+
+-- WHILE
+DECLARE @max_price AS INT = 200;
+WHILE @max_price > 100
+	BEGIN
+	    PRINT @max_price;
+	    SET @max_price -=1
+	END
+-- 200
+-- 199
+-- 198
+
+-- WHILE with data
+DECLARE @place_id AS INT = 1;
+DECLARE @territory_bonus as INT;
+WHILE @place_id <= 10
+	BEGIN
+	    SELECT @territory_bonus = Bonus FROM [AdventureWorks].[Sales].[SalesPerson] WHERE TerritoryID=@place_id;
+	    PRINT @territory_bonus;
+	    PRINT @place_id;
+	    SET @place_id +=1;
+	END
+
+-- 3900
+-- 1
+-- 4100
+-- 2
+-- 2500
+-- 3
+
+--
+DECLARE @place_id AS INT = 1;
+DECLARE @territory_bonus as INT;
+WHILE @place_id <= 10
+	BEGIN
+		SELECT @territory_bonus = Bonus FROM [AdventureWorks].[Sales].[SalesPerson] WHERE TerritoryID=@place_id;
+		--PRINT @territory_bonus
+		IF @territory_bonus > 4000
+			BEGIN
+				PRINT 'Big bonus for territory ' + CAST(@place_id as varchar(255)) + CAST(@territory_bonus AS VARCHAR(30));
+			END
+	SET @place_id +=1;
+	END
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
