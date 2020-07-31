@@ -116,6 +116,10 @@ INSERT INTO production.categories(category_id,category_name) VALUES(2,'Comfort B
 
 SET IDENTITY_INSERT production.categories OFF;  
 ```
+#### Data type
+
+##### varchar: Variable-length, non-Unicode character data. The database collation determines which code page the data is stored using.
+##### nvarchar: Variable-length Unicode character data. Dependent on the database collation for comparisons.
 ##### Case
 ``` sql
 use BikeStores;
