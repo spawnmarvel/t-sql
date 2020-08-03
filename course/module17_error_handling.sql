@@ -22,7 +22,7 @@ EXEC sp_addmessage 50001, 10, N'NA value entered'
 
 SELECT * FROM sys.messages 
 WHERE language_id= 1033
--- message_id, language_id, severitym is_event_logged, text
+-- message_id, language_id, severity, is_event_logged, text
 -- 50001	1033	10	0	NA value entered
 -- 21	1033	20	0	Warning: Fatal error %d occurred at %S_DATE. Note the error and time, and contact your system administrator.
 -- 101	1033	15	0	Query not allowed in Waitfor.
@@ -96,3 +96,21 @@ RAISERROR ('No action needed',14,1) -- Change level to 14 = error
 -- Raise custom 
 RAISERROR (N'%s %d %s',10,1,N'Error numb:',123,N'- All ok')
 -- Error numb: 123 - All ok
+
+--Catch @@error num
+DECLARE @error_num INT;
+RAISERROR('Capture number for error', 14,1);
+SET @error_num = @@ERROR
+IF @error_num <> 0 --no error
+	PRINT 'Error msg ' + CAST(@error_num as VARCHAR(20))
+-- Msg 50000, Level 14, State 1, Line 2
+-- Capture number for error
+-- Error msg 50000
+
+-- Create user defined error
+EXEC sp_addmessage 50005, 10,N'User defined error'
+-- Call it
+RAISERROR(50005, 10, 1)
+-- result
+-- User defined error
+
