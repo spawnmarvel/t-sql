@@ -114,3 +114,46 @@ RAISERROR(50005, 10, 1)
 -- result
 -- User defined error
 
+
+-- Implementing Structured Exception Handling
+-- TRY block defined with BEGIN TRY, END TRY
+-- All codes that could raise the error goes inside above
+-- No code between END TRY, BEGIN CATCH
+-- TRY / CATCH may be nested
+-- CATCH defined with BEGIN CATCH, END CATCH
+-- Additional functions, ERROR_LINE, MESSAGE, NUMBER, PROCEDURE, SEVERITY, STATE
+
+-- Catchable vs. Noncatchable Errors
+-- Not all errror can be caught in block, within the same scope
+-- Noncatchble , compile error, syntax
+-- Statemant recompilation, deffered name resolution
+
+-- Rethrowing Errors Using THROW
+-- THROW (no param) to re raise caught error
+BEGIN TRY
+-- code
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE();
+    THROW; -- 
+    -- Use this tech to implement logging error in db, catch and get details, and throw main/orginal error to app
+END CATCH;
+
+-- Errors in Managed Code
+-- Can be run within SQL server, .Net code to write procedure, functions, triggers, datatypes, aggregation etc
+-- Error must be handled by managed code
+-- Unhandled error return number 6522 = Call to managed code that failed
+-- No client code, but backend code on SQL server
+
+USE test;
+GO
+
+-- if set to 0, then error
+DECLARE @my_num varchar(20) = '0';
+BEGIN TRY
+	PRINT 10 / @my_num;
+END TRY
+BEGIN CATCH
+	PRINT 'Er msg ' + CAST(ERROR_NUMBER() AS varchar(12)) + ';' + ERROR_MESSAGE();
+END CATCH
+
