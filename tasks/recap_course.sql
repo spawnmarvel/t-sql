@@ -18,8 +18,17 @@ FROM Sales.SalesOrderDetail;
 -- more built in
 
 -- GROUP BY
-SELECT SalesPersonID, COUNT(*) AS sales_total
+-- get all sales from salesperson and the total sum and tax
+SELECT SalesPersonID, COUNT(*) AS sales_total, SUM(SubTotal) AS sales_money,SUM(TaxAmt) AS total_tax
 FROM Sales.SalesOrderHeader
 GROUP BY SalesPersonID
 ORDER by sales_total desc
---
+
+-- get total sale, total sale - rejected, rejected, the overall total and number of rejected items
+SELECT 
+SUM(UnitPrice*OrderQty) AS total_sale_sum,  
+SUM(UnitPrice*(OrderQty-RejectedQty)) AS total_sales_minus_rejected_sum, 
+SUM(UnitPrice*RejectedQty) AS total_rejected_sum,
+SUM(UnitPrice*(OrderQty-RejectedQty)) + SUM(UnitPrice*RejectedQty) AS total_all, 
+COUNT(RejectedQty) as total_num_of_rejected
+FROM [AdventureWorks].[Purchasing].[PurchaseOrderDetail]
