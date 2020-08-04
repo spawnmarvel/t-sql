@@ -19,11 +19,33 @@ FROM Sales.SalesOrderDetail;
 
 -- GROUP BY
 -- get all sales from salesperson and the total sum and tax
-SELECT SalesPersonID, COUNT(*) AS sales_total, SUM(SubTotal) AS sales_money,SUM(TaxAmt) AS total_tax
+SELECT SalesPersonID, COUNT(*) AS sales_total, 
+SUM(SubTotal) AS sales_money,
+SUM(TaxAmt) AS total_tax
 FROM Sales.SalesOrderHeader
 GROUP BY SalesPersonID
 ORDER by sales_total desc
-
+--
+-- same as above but with year = 2008
+SELECT SalesPersonID, COUNT(*) AS sales_total, 
+SUM(SubTotal) AS sales_money,SUM(TaxAmt) AS total_tax
+FROM Sales.SalesOrderHeader
+WHERE YEAR(OrderDate)= 2008
+GROUP BY SalesPersonID
+ORDER by sales_total desc
+--
+-- The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.
+-- same as above but with more then 80 customers
+SELECT SalesPersonID, COUNT(*) AS sales_total, 
+SUM(SubTotal) AS sales_money,
+SUM(TaxAmt) AS total_tax, 
+COUNT(CustomerID) as total_customers
+FROM Sales.SalesOrderHeader
+WHERE YEAR(OrderDate)= 2008
+GROUP BY SalesPersonID
+HAVING COUNT(CustomerID) > 80 -- more than 80 customers
+ORDER by sales_total desc
+--
 -- get total sale, total sale - rejected, rejected, the overall total and number of rejected items
 SELECT 
 SUM(UnitPrice*OrderQty) AS total_sale_sum,  
