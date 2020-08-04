@@ -18,5 +18,8 @@ FROM Sales.SalesOrderDetail;
 -- more built in
 
 -- GROUP BY
-
+SELECT SalesPersonID, COUNT(*) AS sales_total
+FROM Sales.SalesOrderHeader
+GROUP BY SalesPersonID
+ORDER by sales_total desc
 --
