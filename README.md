@@ -262,3 +262,35 @@ SELECT st.s_id
 * 4	Ida Back	28	NULL	NULL	NULL
 
 
+##### View
+``` sql
+use BikeStores;
+GO
+CREATE VIEW ProductAndBrands
+AS
+SELECT pr.[product_id]
+      ,pr.[product_name]
+	  ,br.brand_name
+	  ,pr.[brand_id]
+	  ,pr.[category_id]
+	  ,ca.category_name
+      ,pr.[model_year]
+      ,pr.[list_price]
+  FROM [BikeStores].[production].[products] pr
+  INNER JOIN production.categories ca ON ca.category_id=pr.category_id
+  INNER JOIN production.brands br on br.brand_id=pr.brand_id
+
+USE BikeStores;
+GO
+ALTER VIEW ProductAndBrands
+AS
+SELECT pr.[product_id]
+      ,pr.[product_name]
+	  ,br.brand_name
+	  ,ca.category_name
+      ,pr.[model_year]
+      ,pr.[list_price]
+  FROM [BikeStores].[production].[products] pr
+  INNER JOIN production.categories ca ON ca.category_id=pr.category_id
+  INNER JOIN production.brands br on br.brand_id=pr.brand_id
+```
