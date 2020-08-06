@@ -100,18 +100,18 @@ CREATE TABLE production.products (
 ``` sql
 use BikeStores;
 
-SET IDENTITY_INSERT production.brands ON;  
+SET IDENTITY_INSERT production.brands ON;  -- whenever you want to manually insert a value for your identity column
 
 INSERT INTO production.brands(brand_id,brand_name) VALUES(1,'Electra')
 INSERT INTO production.brands(brand_id,brand_name) VALUES(2,'Haro')
 INSERT INTO production.brands(brand_id,brand_name) VALUES(3,'Heller')
 -- and more [...]
 
-SET IDENTITY_INSERT production.brands OFF;  
+SET IDENTITY_INSERT production.brands OFF;  -- and turn it off again
 
-SET IDENTITY_INSERT production.categories ON;  
-INSERT INTO production.categories(category_id,category_name) VALUES(1,'Children Bicycles')
-INSERT INTO production.categories(category_id,category_name) VALUES(2,'Comfort Bicycles')
+-- or like this 
+INSERT INTO production.brands(brand_name) VALUES('Air')
+INSERT INTO production.brands(brand_name) VALUES('Gas')
 -- and more [...]
 
 SET IDENTITY_INSERT production.categories OFF;  
@@ -290,6 +290,7 @@ SELECT pr.[product_id]
 	  ,ca.category_name
       ,pr.[model_year]
       ,pr.[list_price]
+	  -- rm some columns
   FROM [BikeStores].[production].[products] pr
   INNER JOIN production.categories ca ON ca.category_id=pr.category_id
   INNER JOIN production.brands br on br.brand_id=pr.brand_id
@@ -317,7 +318,7 @@ EXEC dbo.ProductAndBrandInfo
 --
 use BikeStores;
 GO
-CREATE PROCEDURE ProductAndBrandInfoYear (@check_year AS INT)
+CREATE PROCEDURE ProductAndBrandInfoYear (@check_year AS INT) -- with param
 AS
 SELECT pr.[product_id]
       ,pr.[product_name]
@@ -330,14 +331,14 @@ SELECT pr.[product_id]
   FROM [BikeStores].[production].[products] pr
   INNER JOIN production.categories ca ON ca.category_id=pr.category_id
   INNER JOIN production.brands br on br.brand_id=pr.brand_id
-  WHERE pr.model_year= @check_year
+  WHERE pr.model_year= @check_year -- param
 --
 EXEC dbo.ProductAndBrandInfoYear @check_year=2017;
 
 --Alter it
 use BikeStores;
 GO
-ALTER PROCEDURE ProductAndBrandInfoYear (@check_year AS SMALLINT, @list_price_greather_than as DECIMAL)
+ALTER PROCEDURE ProductAndBrandInfoYear (@check_year AS SMALLINT, @list_price_greather_than as DECIMAL) -- with 2 param
 AS
 SELECT pr.[product_id]
       ,pr.[product_name]
@@ -350,8 +351,8 @@ SELECT pr.[product_id]
   FROM [BikeStores].[production].[products] pr
   INNER JOIN production.categories ca ON ca.category_id=pr.category_id
   INNER JOIN production.brands br on br.brand_id=pr.brand_id
-  WHERE pr.model_year= @check_year
-  AND pr.list_price > @list_price_greather_than
+  WHERE pr.model_year= @check_year -- param
+  AND pr.list_price > @list_price_greather_than -- param
   ORDER BY pr.list_price DESC
 --
 EXEC dbo.ProductAndBrandInfoYear @check_year=2016, @list_price_greather_than=1000;
