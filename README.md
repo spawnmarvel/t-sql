@@ -279,7 +279,7 @@ SELECT pr.[product_id]
   FROM [BikeStores].[production].[products] pr
   INNER JOIN production.categories ca ON ca.category_id=pr.category_id
   INNER JOIN production.brands br on br.brand_id=pr.brand_id
-
+-- Alter it
 USE BikeStores;
 GO
 ALTER VIEW ProductAndBrands
@@ -293,4 +293,66 @@ SELECT pr.[product_id]
   FROM [BikeStores].[production].[products] pr
   INNER JOIN production.categories ca ON ca.category_id=pr.category_id
   INNER JOIN production.brands br on br.brand_id=pr.brand_id
+```
+
+##### Procedure
+``` sql
+use BikeStores;
+GO
+CREATE PROCEDURE ProductAndBrandInfo
+AS
+SELECT pr.[product_id]
+      ,pr.[product_name]
+	  ,br.brand_name
+	  ,pr.[brand_id]
+	  ,pr.[category_id]
+	  ,ca.category_name
+      ,pr.[model_year]
+      ,pr.[list_price]
+  FROM [BikeStores].[production].[products] pr
+  INNER JOIN production.categories ca ON ca.category_id=pr.category_id
+  INNER JOIN production.brands br on br.brand_id=pr.brand_id
+--
+EXEC dbo.ProductAndBrandInfo
+--
+use BikeStores;
+GO
+CREATE PROCEDURE ProductAndBrandInfoYear (@check_year AS INT)
+AS
+SELECT pr.[product_id]
+      ,pr.[product_name]
+	  ,br.brand_name
+	  ,pr.[brand_id]
+	  ,pr.[category_id]
+	  ,ca.category_name
+      ,pr.[model_year]
+      ,pr.[list_price]
+  FROM [BikeStores].[production].[products] pr
+  INNER JOIN production.categories ca ON ca.category_id=pr.category_id
+  INNER JOIN production.brands br on br.brand_id=pr.brand_id
+  WHERE pr.model_year= @check_year
+--
+EXEC dbo.ProductAndBrandInfoYear @check_year=2017;
+
+--Alter it
+use BikeStores;
+GO
+ALTER PROCEDURE ProductAndBrandInfoYear (@check_year AS SMALLINT, @list_price_greather_than as DECIMAL)
+AS
+SELECT pr.[product_id]
+      ,pr.[product_name]
+	  ,br.brand_name
+	  ,pr.[brand_id]
+	  ,pr.[category_id]
+	  ,ca.category_name
+      ,pr.[model_year]
+      ,pr.[list_price]
+  FROM [BikeStores].[production].[products] pr
+  INNER JOIN production.categories ca ON ca.category_id=pr.category_id
+  INNER JOIN production.brands br on br.brand_id=pr.brand_id
+  WHERE pr.model_year= @check_year
+  AND pr.list_price > @list_price_greather_than
+  ORDER BY pr.list_price DESC
+--
+EXEC dbo.ProductAndBrandInfoYear @check_year=2016, @list_price_greather_than=1000;
 ```
