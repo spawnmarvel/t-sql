@@ -10,12 +10,29 @@ GO
 -- get columns
 EXEC sp_columns SalesOrderDetail;
 
---aggregate functions
-SELECT AVG(UnitPrice) as res_avg, MIN(UnitPrice) res_min, MAX(UnitPrice) res_max
+-- Aggregate Functions (Transact-SQL)
+use AdventureWorks;
+GO
+SELECT 
+AVG(UnitPrice) as res_avg, 
+MIN(UnitPrice) res_min, 
+MAX(UnitPrice) res_max,
+COUNT(*) AS total_num,
+SUM(UnitPrice) total_sum,
+CHECKSUM_AGG(CAST(UnitPrice AS INT)) as num_of_changes, -- check if value is changed
+STDEV(UnitPrice) as res_stdev
+-- In statistics, the standard deviation is a measure of the amount of variation or dispersion of a set of values. 
+-- A low standard deviation indicates that the values tend to be close to the mean (also called the expected value) of the set, 
+-- while a high standard deviation indicates that the values are spread out over a wider range. 
 FROM Sales.SalesOrderDetail;
 
 
--- more built in
+-- Date and Time Functions
+-- Mathematical Functions (Transact-SQL)
+-- Security Functions (Transact-SQL)
+-- String Functions (Transact-SQL)
+
+
 
 -- GROUP BY
 -- get all sales from salesperson and the total sum and tax
