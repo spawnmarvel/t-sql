@@ -3,6 +3,8 @@ Querying Data with Transact-SQL
 
 [docs.microsoft.com] https://docs.microsoft.com/nb-no/sql/?view=sql-server-ver15
 
+[T-SQL] https://www.tsql.info/
+
 [ANSI SQL-92] https://en.wikipedia.org/wiki/SQL-92
 
 [Markdown Github] https://guides.github.com/features/mastering-markdown/
