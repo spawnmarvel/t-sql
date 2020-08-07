@@ -1,6 +1,6 @@
 -- https://www.sqlservercentral.com/articles/database-normalization-in-sql-with-examples
 
---First Normal Form (1NF)
+-- First Normal Form (1NF)
 
 --    Data is stored in tables with rows that can be uniquely identified by a Primary Key.
 --    Data within each table is stored in individual columns in its most reduced form.
