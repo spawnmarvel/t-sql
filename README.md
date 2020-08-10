@@ -144,6 +144,20 @@ SELECT p.category_id, p.product_name,
 	END AS iscampaign
 
 FROM production.products AS p;
+
+-- 
+SELECT 
+	CASE WHEN br.brand_name = 'Electra' THEN 'Electra main'
+	ELSE br.brand_name
+	END AS friendly_name,
+
+	CASE WHEN br.brand_id < 4 THEN 'Newest'
+	ELSE 'Old'
+	END AS category_simple,
+
+	br.brand_id, brand_name
+
+FROM [Bikestores].[production].[brands] br
 ```
 ##### Join
 
