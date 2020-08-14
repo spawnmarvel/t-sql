@@ -23,6 +23,7 @@ Querying Data with Transact-SQL
 
 #### Schema 
 A SQL database contains multiple objects such as tables, views, stored procedures, functions, indexes, triggers. We define SQL Schema as a logical collection of database objects. A user owns that owns the schema is known as schema owner. It is a useful mechanism to segregate database objects for different applications, access rights, managing security administration of databases. We do not have any restrictions on the number of objects in a schema.
+\
 * We can quickly transfer ownership of a SQL schema to another user
 * We can share a schema among multiple users
 * It allows you to move database objects among the schemas
@@ -70,7 +71,7 @@ SELECT * FROM books2
 
 ##### IDENTITY
 ##### IDENTITY [ (seed , increment) ]  
-Seed, Is the value that is used for the very first row loaded into the table.
+Seed, Is the value that is used for the very first row loaded into the table.\
 increment, Is the incremental value that is added to the identity value of the previous row that was loaded.
 ##### Create (first tables):
 ``` sql
@@ -119,7 +120,7 @@ INSERT INTO production.brands(brand_name) VALUES('Gas')
 SET IDENTITY_INSERT production.categories OFF;  
 ```
 #### Data type
-varchar: Variable-length, non-Unicode character data. The database collation determines which code page the data is stored using.
+varchar: Variable-length, non-Unicode character data. The database collation determines which code page the data is stored using.\
 nvarchar: Variable-length Unicode character data. Dependent on the database collation for comparisons.
 ##### Case
 ``` sql
