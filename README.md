@@ -70,8 +70,8 @@ SELECT * FROM books2
 
 ##### IDENTITY
 ##### IDENTITY [ (seed , increment) ]  
-##### seed, Is the value that is used for the very first row loaded into the table.
-##### increment, Is the incremental value that is added to the identity value of the previous row that was loaded.
+Seed, Is the value that is used for the very first row loaded into the table.
+increment, Is the incremental value that is added to the identity value of the previous row that was loaded.
 ##### Create (first tables):
 ``` sql
 -- create schemas
@@ -119,9 +119,8 @@ INSERT INTO production.brands(brand_name) VALUES('Gas')
 SET IDENTITY_INSERT production.categories OFF;  
 ```
 #### Data type
-
-##### varchar: Variable-length, non-Unicode character data. The database collation determines which code page the data is stored using.
-##### nvarchar: Variable-length Unicode character data. Dependent on the database collation for comparisons.
+varchar: Variable-length, non-Unicode character data. The database collation determines which code page the data is stored using.
+nvarchar: Variable-length Unicode character data. Dependent on the database collation for comparisons.
 ##### Case
 ``` sql
 use BikeStores;
@@ -161,7 +160,7 @@ FROM [Bikestores].[production].[brands] br
 ```
 ##### Join
 
-##### Consider the following tables:
+Consider the following tables:
 ``` sql
 
 
@@ -208,7 +207,7 @@ SELECT st.s_id
   FROM students AS st
   INNER JOIN fee AS fe ON st.s_id = fe.s_id
 ```
-##### Data, We can tell the students who have paid their fee (returns rows from two tables when a match is found)
+Data, We can tell the students who have paid their fee (returns rows from two tables when a match is found)
 * s_id	s_name	s_age	s_id	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
 * 3	Lisa Fresh	28	3	IT	200
@@ -227,8 +226,8 @@ SELECT st.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
 
-##### Data, This type of join will return all rows from the left-hand table plus records in the right-hand table with matching values
-##### returns all rows from the left table, even if there are no matches with the right table
+Data, This type of join will return all rows from the left-hand table plus records in the right-hand table with matching values
+returns all rows from the left table, even if there are no matches with the right table
 
 * s_id	s_name	s_age	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
@@ -251,8 +250,8 @@ SELECT st.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
 
-##### Data,This type of join returns all rows from the right-hand table and only those with matching values in the left-hand table
-##### returns all rows from the right table, even if there are no matches with the left table
+Data,This type of join returns all rows from the right-hand table and only those with matching values in the left-hand table
+returns all rows from the right table, even if there are no matches with the left table
 * s_id	s_name	s_age	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
 * 3	Lisa Fresh	28	3	IT	200
@@ -271,8 +270,8 @@ SELECT st.s_id
   FULL JOIN fee AS fe ON st.s_id = fe.s_id
   --WHERE fe.f_paid IS NOT NULL
 ```
-##### Data,This type of join returns all rows from both tables with NULL values where the JOIN condition is not true
-##### returns all records when there is a match in left (table1) or right (table2) table records
+Data,This type of join returns all rows from both tables with NULL values where the JOIN condition is not true
+returns all records when there is a match in left (table1) or right (table2) table records
 
 * s_id	s_name	s_age	s_id	f_course	f_paid
 * 1	Jim Town	30	1	IT	200
