@@ -11,6 +11,8 @@ Querying Data with Transact-SQL
 
 [Supported Culture Codes] https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes
 
+[In order to allow access to SQL Server instance, we have to enable TCP/IP protocol which is not enabled by default] https://www.sqlshack.com/how-to-connect-to-a-remote-sql-server/
+
 ### Tips
 * Show line numbers. Tools-> Options->Text Editor->Transact-SQL->General
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
