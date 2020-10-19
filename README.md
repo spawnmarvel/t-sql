@@ -13,6 +13,8 @@ Querying Data with Transact-SQL
 
 [In order to allow access to SQL Server instance, we have to enable TCP/IP protocol which is not enabled by default] https://www.sqlshack.com/how-to-connect-to-a-remote-sql-server/
 
+### If SSMS works with windows connection / auth and ODBC does not, try to run the ODBC as the windows user with run as, and then configure the ODBC driver with SQL Server (open file localtion (x2), run as windows user, add system dns, SQL Server, servername, description, server\instance, and that is it, test it, leave the rest default, or set the "Dynamically determine port" to 1433 or 12001, TCP/IP)
+
 ### Tips
 * Show line numbers. Tools-> Options->Text Editor->Transact-SQL->General
 * Show map mode. Tools-> Options->Text Editor->Transact-SQL->Scroll Bars
