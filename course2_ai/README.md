@@ -62,18 +62,11 @@ SQL Server Sample Database https://www.sqlservertutorial.net/getting-started/sql
 
 ### Schema Overview
 
-BikeStores contains three main schemas:
+BikeStores contains two main schemas:
 - **sales** (orders, customers, stores, staffs)
 - **production** (products, brands, categories, stocks)
-- **person** (staff and related info)
 
-### Main Schemas in BikeStores
-
-| Schema      | Description                                       | Example Tables            |
-|-------------|---------------------------------------------------|---------------------------|
-| **sales**   | Sales operations (orders, customers, stores)      | sales.orders, sales.customers, sales.stores, sales.staffs || **production** | Product and inventory details                  | production.products, production.categories, production.brands, production.stocks || **person**  | Staff personal information                        | person.staffs           |
-
-In BikeStores, schemas like sales, production, and person help keep the database organized, secure, and easy to use. When creating, querying, or managing tables, always specify the schema for clarity.
+In BikeStores, schemas like sales and production help keep the database organized, secure, and easy to use. When creating, querying, or managing tables, always specify the schema for clarity.
 
 
 ![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/bikestore_schema.jpg)
