@@ -1,5 +1,7 @@
 # AI tutorial using the BikeStores database
 
+Use AI to learn more
+
 ## Azure Free sql
 
 * Create SQL server
@@ -180,13 +182,8 @@ https://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
 ## Expressions
 
 
-## AI Tutorial next up
+## Azure AdventureWorks sample databases next up 
 
-For sql server do you know the bikestore database? BikeStores Sample Database - create objects.sql 
+https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms
 
-He knows it.
 
-Great, can you make an updated tutorial on how to use it, from basic to intermediate. Make it like a github file markup, so I can copy and paste.
-
-- **Backup your database** before experimenting with updates or deletes.
-- Use TOP (N) to limit results.- Use ORDER BY to sort outputs.- Try using **Views** or **Stored Procedures** for more advanced practice.
