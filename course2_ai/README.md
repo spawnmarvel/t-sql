@@ -14,7 +14,7 @@ https://learn.microsoft.com/en-us/azure/azure-sql/database/free-offer?view=azure
 
 ![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
 
-## BikeStore
+## BikeStore (localhost)
 
 GOTO and load db files after creating a db called BikeStores https://www.sqlservertutorial.net/getting-started/load-sample-database/
 
