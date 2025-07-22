@@ -60,6 +60,8 @@ The **BikeStores** sample database is a great tool for practicing SQL queries an
 
 ## Exploring the Database
 
+SQL Server Sample Database https://www.sqlservertutorial.net/getting-started/sql-server-sample-database/
+
 ### Schema Overview
 
 BikeStores contains three main schemas:
@@ -68,6 +70,7 @@ BikeStores contains three main schemas:
 - **person** (staff and related info)
 
 ![BikeStores Schema](https://github.com/microsoft/sql-server-samples/raw/master/samples/databases/bikestores/bikestores-schema.png)
+
 
 ### Viewing Tables
 
