@@ -37,6 +37,7 @@ The **BikeStores** sample database is a great tool for practicing SQL queries an
 
 1.  BikeStores Sample Database - load data.sql Execute the script to insert sample data.
 
+![BikeStores data](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/bikestore_data.jpg)
 ---
 
 ## Exploring the Database
