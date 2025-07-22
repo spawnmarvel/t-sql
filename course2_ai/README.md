@@ -1,5 +1,19 @@
 # AI tutorial using the BikeStores database
 
+## Azure Free sql
+
+* Create SQL server
+* Init with sample db adventureworks
+* Created alert rule when only 10000 vCore seconds of compute left.
+
+Try Azure SQL Database at no cost with our free tier offer. Each Azure subscription allows you to create up to 10 General Purpose databases.
+
+For each database, you receive a monthly allowance of 100,000 vCore seconds of compute, 32 GB of data storage, and 32 GB of backup storage, free for the lifetime of your subscription.
+
+https://learn.microsoft.com/en-us/azure/azure-sql/database/free-offer?view=azuresql
+
+![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
+
 ## BikeStore
 
 GOTO and load db files after creating a db called BikeStores https://www.sqlservertutorial.net/getting-started/load-sample-database/
