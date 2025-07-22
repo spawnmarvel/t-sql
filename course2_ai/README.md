@@ -69,7 +69,7 @@ BikeStores contains three main schemas:
 - **production** (products, brands, categories, stocks)
 - **person** (staff and related info)
 
-![BikeStores Schema](https://github.com/microsoft/sql-server-samples/raw/master/samples/databases/bikestores/bikestores-schema.png)
+![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/bikestore_schema.jpg)
 
 
 ### Viewing Tables
