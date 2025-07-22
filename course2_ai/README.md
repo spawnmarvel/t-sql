@@ -69,50 +69,94 @@ In BikeStores, schemas like sales, production, and person help keep the database
 ## Data Manipulation
 
 SELECT
+
 ORDER BY
+
 OFFSET FETCH
+
 SELECT TOP
+
 SELECT DISTINCT
+
 WHERE
+
 NULL
+
 AND
+
 OR
+
 IN
+
 BETWEEN
+
 LIKE
+
 Column & Table Aliases
+
 Joins
+
 INNER JOIN
+
 LEFT JOIN
+
 RIGHT JOIN
+
 FULL OUTER JOIN
+
 Self Join
+
 CROSS JOIN
 CROSS APPLY
+
 GROUP BY
+
 HAVING
+
 GROUPING SETS
+
 CUBE
+
 ROLLUP
+
 Subquery
+
 Correlated Subquery
+
 EXISTS
+
 ANY
+
 ALL
+
 UNION
+
 INTERSECT
+
 EXCEPT
+
 Common Table Expression (CTE)
+
 Recursive CTE
+
 INSERT
+
 INSERT Multiple Rows
+
 INSERT INTO SELECT
+
 UPDATE
+
 UPDATE JOIN
+
 DELETE
+
 MERGE
+
 PIVOT
+
 Transaction
+
 https://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
 
 ## Data Definition
