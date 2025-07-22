@@ -69,6 +69,12 @@ BikeStores contains three main schemas:
 - **production** (products, brands, categories, stocks)
 - **person** (staff and related info)
 
+### Main Schemas in BikeStores
+
+| Schema      | Description                                       | Example Tables            |
+|-------------|---------------------------------------------------|---------------------------|
+| **sales**   | Sales operations (orders, customers, stores)      | sales.orders, sales.customers, sales.stores, sales.staffs || **production** | Product and inventory details                  | production.products, production.categories, production.brands, production.stocks || **person**  | Staff personal information                        | person.staffs           |
+
 ![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/bikestore_schema.jpg)
 
 
