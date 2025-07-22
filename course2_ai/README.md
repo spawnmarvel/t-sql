@@ -57,15 +57,78 @@ BikeStores contains three main schemas:
 |-------------|---------------------------------------------------|---------------------------|
 | **sales**   | Sales operations (orders, customers, stores)      | sales.orders, sales.customers, sales.stores, sales.staffs || **production** | Product and inventory details                  | production.products, production.categories, production.brands, production.stocks || **person**  | Staff personal information                        | person.staffs           |
 
+In BikeStores, schemas like sales, production, and person help keep the database organized, secure, and easy to use. When creating, querying, or managing tables, always specify the schema for clarity.
+
+
 ![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/bikestore_schema.jpg)
 
 
 
 
 
+## Data Manipulation
+
+SELECT
+ORDER BY
+OFFSET FETCH
+SELECT TOP
+SELECT DISTINCT
+WHERE
+NULL
+AND
+OR
+IN
+BETWEEN
+LIKE
+Column & Table Aliases
+Joins
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN
+FULL OUTER JOIN
+Self Join
+CROSS JOIN
+CROSS APPLY
+GROUP BY
+HAVING
+GROUPING SETS
+CUBE
+ROLLUP
+Subquery
+Correlated Subquery
+EXISTS
+ANY
+ALL
+UNION
+INTERSECT
+EXCEPT
+Common Table Expression (CTE)
+Recursive CTE
+INSERT
+INSERT Multiple Rows
+INSERT INTO SELECT
+UPDATE
+UPDATE JOIN
+DELETE
+MERGE
+PIVOT
+Transaction
+https://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
+
+## Data Definition
+
+## Data Types
+
+## Expressions
 
 
+## AI Tutorial next up
 
+For sql server do you know the bikestore database? BikeStores Sample Database - create objects.sql 
 
+He knows it.
 
+Great, can you make an updated tutorial on how to use it, from basic to intermediate. Make it like a github file markup, so I can copy and paste.
 
+- **Backup your database** before experimenting with updates or deletes.
+- Use TOP (N) to limit results.- Use ORDER BY to sort outputs.- Try using **Views** or **Stored Procedures** for more advanced practice.
