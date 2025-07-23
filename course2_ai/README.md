@@ -45,9 +45,17 @@ The **BikeStores** sample database is a great tool for practicing SQL queries an
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (2016 or later recommended)
 - [SQL Server Management Studio (SSMS)](https://aka.ms/ssms) or Azure Data Studio
 
+SSMS
+
+![SQL icon](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_icon.jpg)
+
 Location of files
 
 ![SQL files](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_files.jpg)
+
+Services
+
+![SQL services](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_services.jpg)
 
 ### Download BikeStores Scripts
 
