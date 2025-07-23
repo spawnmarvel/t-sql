@@ -18,7 +18,7 @@ https://learn.microsoft.com/en-us/azure/azure-sql/database/free-offer?view=azure
 
 You can view how much you have left using the free amount metric
 
-![Az db free](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
+![Az db free](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free_amount.jpg)
 
 
 
