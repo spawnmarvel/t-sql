@@ -14,7 +14,13 @@ For each database, you receive a monthly allowance of 100,000 vCore seconds of c
 
 https://learn.microsoft.com/en-us/azure/azure-sql/database/free-offer?view=azuresql
 
-![BikeStores Schema](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
+![Az db](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
+
+You can view how much you have left using the free amount metric
+
+![Az db free](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_free.jpg)
+
+
 
 ## BikeStore (localhost)
 
