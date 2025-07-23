@@ -45,7 +45,7 @@ The **BikeStores** sample database is a great tool for practicing SQL queries an
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (2016 or later recommended)
 - [SQL Server Management Studio (SSMS)](https://aka.ms/ssms) or Azure Data Studio
 
-SSMS
+SSMS MSSQL16.SQLEXPRESS
 
 ![SQL icon](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/sql_icon.jpg)
 
@@ -195,22 +195,11 @@ https://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
 
 ## Azure AdventureWorks sample databases next up 
 
-Lets try to impprt/restore the Lightweight AdventureWorksLT2022.bak
+Lets try to impprt/restore the Lightweight AdventureWorksLT2022.bak, save it in C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\Backup\AdventureWorksLT2022.bak
 
 Restore to SQL Server
 
-```sql
-USE [master];
-GO
-RESTORE DATABASE [AdventureWorks2022]
-FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\AdventureWorksLT2022.bak'
-WITH
-    FILE = 1,
-    NOUNLOAD,
-    STATS = 5;
-GO
-
-```
+![adventureworks restore](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/adventureworks_restore.jpg)
 
 https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms
 
