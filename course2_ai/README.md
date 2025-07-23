@@ -134,6 +134,9 @@ FULL OUTER JOIN
 Self Join
 
 CROSS JOIN
+
+![Joins](https://github.com/spawnmarvel/t-sql/blob/master/course2_ai/images/joins.jpg)
+
 CROSS APPLY
 
 GROUP BY
