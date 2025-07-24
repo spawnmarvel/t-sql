@@ -97,7 +97,49 @@ In BikeStores, schemas like sales and production help keep the database organize
 
 SELECT
 
+```sql
+use BikeStores
+select first_name, last_name
+from sales.customers;
+
+use BikeStores
+select *
+from sales.customers
+
+use BikeStores
+select *
+from sales.customers
+where city = 'New York'
+
+use BikeStores
+select first_name, last_name
+from sales.customers
+where city = 'New York'
+order by first_name
+
+-- the following statement returns all the cities of customers located in California and the number of customers in each city.
+use BikeStores
+select city, count(*)
+from sales.customers
+where state = 'CA'
+group by city
+order by city
+
+-- the following statement uses the HAVING clause to return the city in California, which has more than ten customers:
+use BikeStores
+select city, count(*)
+from sales.customers
+where state = 'CA'
+group by city
+HAVING COUNT(*) > 10
+order by city
+```
+
 ORDER BY
+
+```sql
+
+```
 
 OFFSET FETCH
 
