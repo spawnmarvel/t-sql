@@ -139,9 +139,40 @@ ORDER BY
 
 ```sql
 
+use BikeStores
+select *
+from sales.customers
+order by last_name
+-- asc default
+
+-- sort by city, first name
+use BikeStores
+select city, first_name,last_name
+from sales.customers
+order by city, first_name
+
+-- Sort a result set by an expression
+use BikeStores
+select first_name,last_name
+from sales.customers
+order by LEN(first_name)
+
+-- Sort by ordinal positions of columns
+use BikeStores
+select first_name,last_name
+from sales.customers
+order by 2
+
+
 ```
 
 OFFSET FETCH
+
+* The OFFSET and FETCH clauses are options of the ORDER BY clause. They allow you to limit the number of rows returned by a query.
+
+```sql
+
+```
 
 SELECT TOP
 
