@@ -170,6 +170,8 @@ OFFSET FETCH
 
 * The OFFSET and FETCH clauses are options of the ORDER BY clause. They allow you to limit the number of rows returned by a query.
 
+
+![offset and fetch](https://github.com/spawnmarvel/t-sql/tree/master/course2_ai/images/offset.jpg)
 ```sql
 
 ```
