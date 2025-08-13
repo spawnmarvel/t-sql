@@ -175,6 +175,28 @@ OFFSET FETCH
 
 ```sql
 
+--To skip the first 10 products and return the rest, you use the OFFSET clause as shown in the following statement:
+use BikeStores
+select product_name, list_price
+from production.products
+order by list_price, product_name
+offset 10 rows
+
+-- To skip the first 10 products and select the next 10 products, you use both OFFSET and FETCH clauses as follows:
+use BikeStores
+select product_name, list_price
+from production.products
+order by list_price, product_name
+offset 10 rows
+fetch next 10 rows only
+
+-- The following example uses the OFFSET FETCH clause to retrieve the top 10 most expensive products from the products table: Note desc
+use BikeStores
+select product_name, list_price
+from production.products
+order by list_price desc, product_name
+offset 0 rows
+fetch first 10 rows only
 ```
 
 SELECT TOP
